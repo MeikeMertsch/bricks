@@ -3,9 +3,12 @@
 /checkouts
 pom.xml
 pom.xml.asc
+secret
 *.jar
 *.class
 /.lein-*
 /.nrepl-port
 .hgignore
 .hg/
+.idea/
+bricks.iml

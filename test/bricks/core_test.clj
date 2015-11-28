@@ -1,7 +1,11 @@
 (ns bricks.core-test
-  (:require [clojure.test :refer :all]
-            [bricks.core :refer :all]))
+  (:require [expectations :refer :all]
+            [bricks.core :as core]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+
+(defn headers []
+ {"Authorization" (slurp "secret")})
+
+(println (core/html-get "/inventories" {:headers (headers)}))
+
+

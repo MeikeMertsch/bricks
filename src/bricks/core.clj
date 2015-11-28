@@ -1,7 +1,12 @@
 (ns bricks.core
-  (:gen-class))
+  (:gen-class)
+  (:require [clj-http.client :as client]
+            [bricks.constants :as const]))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+
+(defn html-get
+  ([url] (html-get url nil))
+  ([url params] (client/get (str const/base-url url) params)))
+
+(defn html-post [url params]
+  (client/post (str const/base-url url) params))
