@@ -31,8 +31,13 @@
 (defn test-get [site]
   (core/html-get site {:headers (->header site)}))
 
+(defn ->data [html-answer]
+  (->> html-answer
+       :body
+       (#(json/parse-string % const/transform-to-keywords))
+       :data))
 
-(println (test-get "/colors"))
+(println (->data (test-get "/colors")))
 
 
 (defn test-get-params []
