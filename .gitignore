@@ -3,7 +3,7 @@
 /checkouts
 pom.xml
 pom.xml.asc
-secret
+secrets
 *.jar
 *.class
 /.lein-*
