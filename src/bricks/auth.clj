@@ -21,12 +21,13 @@
                                    nil
                                    :hmac-sha1))
 
-(defn ->header [site]
+(defn ->header [site params]
   (let [creds (oauth/credentials consumer
                                  (:token oauth-secrets)
                                  (:token-secret oauth-secrets)
                                  :GET
-                                 (str const/base-url site))]
+                                 (str const/base-url site)
+                                 params)]
     {"Authorization" (str "OAuth realm=\"\",oauth_version=\"1.0\",oauth_consumer_key=\"" (:oauth_consumer_key creds)
                           "\",oauth_token=\"" (:oauth_token creds)
                           "\",oauth_timestamp=\"" (:oauth_timestamp creds)

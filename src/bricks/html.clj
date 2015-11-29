@@ -13,7 +13,9 @@
 
 (defn html-get
   ([url] (html-get url nil))
-  ([url params] (auth/retry #(->> (client/get (str const/base-url url) (merge {:headers (auth/->header url)}) params)
+  ([url params] (auth/retry #(->> (client/get (str const/base-url url)
+                                              (merge {:headers (auth/->header url params)}
+                                                     {:query-params params}))
                                   ->data) 10)))
 
 (defn html-post [url params]
