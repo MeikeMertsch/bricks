@@ -42,7 +42,7 @@
          result nil]
     (if (or (>= i max)
             (not= nil result))
-      [i result]
+      result
       (recur (inc i)
              (f)))))
 
