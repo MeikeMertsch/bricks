@@ -18,9 +18,3 @@
 
 (defn html-post [url params]
   (client/post (str const/base-url url) params))
-
-
-
-
-
-(println (html-get "/inventories"))
