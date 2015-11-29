@@ -37,7 +37,17 @@
        (#(json/parse-string % const/transform-to-keywords))
        :data))
 
-(println (->data (test-get "/colors")))
+(defn retry [f max]
+  (loop [i 0
+         result nil]
+    (if (or (>= i max)
+            (not= nil result))
+      [i result]
+      (recur (inc i)
+             (f)))))
+
+
+(println (retry #(->data (test-get "/colors")) 10))
 
 
 (defn test-get-params []
