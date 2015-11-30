@@ -7,7 +7,9 @@
 (def colors (->> (slurp "resources/colors") (#(json/parse-string % const/transform-to-keywords))))
 
 (defn color-id [name]
-  (peek (specter/select [specter/ALL #(= name (:color_name %)) :color_id] colors)))
+  (let [id
+  (peek (specter/select [specter/ALL #(= name (:color_name %)) :color_id] colors))]
+    (if id id (throw (Exception. "The color isn't recognized")))))
 
 (defn price [number color]
   (->> (html/html-get (str "/items/part/" number "/price")

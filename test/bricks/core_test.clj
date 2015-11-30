@@ -4,6 +4,7 @@
             [expectations :refer :all]))
 
 (expect 86 (color-id "light bluish gray"))
+(expect Exception (color-id "lbg"))
 
 
 ;;Should test for structure
