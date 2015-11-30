@@ -21,28 +21,53 @@
                        :guide_type "sold"})
        :avg_price))
 
+
 (defn read-lines [file-name f]
   (let [reader (io/reader file-name)]
     (->> (line-seq reader)
          (map f))))
 
 (defn parse-upload-instructions [line]
-  (let [[part amount color] (clojure.string/split line #";")
+  (let [[part qty color] (clojure.string/split line #";")
         ->int #(int (bigint %))]
-    [part (->int amount) (color-id color)]))
+    (try
+      [line part (->int qty) (color-id color)]
 
+      (catch Exception e
+        (let [log (format "%s --> skipped: %s" line e)]
+          [log])))))
+
+(defn known-color? [part color-id]
+  (->> (html/html-get (str "/items/part/" part "/colors"))
+       (filter #(= color-id (:color_id %)))
+       ((complement empty?))))
+
+
+(defn validate-instructions
+  ([log] [log])
+  ([line part quantity color-id]
+   (let [log #(format "%s --> skipped: %s" line %)]
+     (try
+       (if (known-color? part color-id)
+         [line part quantity color-id]
+         [(log "color is not known for that part")])
+       (catch Exception e
+         [(log e)])))))
 
 
 ; TODO:
 (defn upload-inventories [file]
   (->> (read-lines file parse-upload-instructions)
-       ; Validate Instructions
-       ;; ON PASS
-       ;;; Instructions -> Items
-       ;;; POST
-       ;; ON FAIL
-       ;;; Spit Intructions + Error
-       ))
+       (map #(apply validate-instructions %))
+       (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
+          'a
+          'b
+          ;; ON PASS
+          ;;; Instructions -> Items
+          ;;; POST
+          ;; ON FAIL
+          ;;; Spit Intructions + Error
+          ))))
 
 ; TODO:
 (defn update-inventories [file stockroom]
