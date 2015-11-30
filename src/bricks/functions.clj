@@ -1,9 +1,10 @@
-(ns bricks.core
+(ns bricks.functions
   (:require [cheshire.core :as json]
             [bricks.constants :as const]
             [clojure.java.io :as io]
             [com.rpl.specter :as specter]
-            [bricks.html :as html]))
+            [bricks.html :as html]
+            [bricks.auth :as auth]))
 
 (def colors (->> (slurp "resources/colors")
                  (#(json/parse-string % const/transform-to-keywords))))
@@ -13,11 +14,11 @@
         id (peek (specter/select colors-->id colors))]
     (if id id (throw (Exception. "The color isn't recognized")))))
 
-(defn price [number color]
+(defn price [number color-id]
   (->> (html/html-get (str "/items/part/" number "/price")
                       {:type       "part"
                        :no         number
-                       :color_id   (color-id color)
+                       :color_id   color-id
                        :guide_type "sold"})
        :avg_price))
 
@@ -26,6 +27,11 @@
   (let [reader (io/reader file-name)]
     (->> (line-seq reader)
          (map f))))
+
+(defn write-lines [file-path lines]
+  (with-open [wtr (clojure.java.io/writer (str file-path "_changed"))]
+    (doseq [line lines] (.write wtr (str line "\n")))))
+
 
 (defn parse-upload-instructions [line]
   (let [[part qty color] (clojure.string/split line #";")
@@ -55,19 +61,41 @@
          [(log e)])))))
 
 
-; TODO:
+(defn ->items [[_ part quantity color-id]]
+  {:item           {:no   part
+                    :type "part"}
+   :color_id       color-id
+   :quantity       quantity
+   :unit_price     (price part color-id)
+   :new_or_used    "N"
+   :description    ""
+   :remarks        ""
+   :bulk           1
+   :is_retain      false
+   :is_stock_room  true
+   :stock_room_id  "B"
+   :my_cost        0.0
+   :sale_rate      0
+   :tier_quantity1 0
+   :tier_price1    0
+   :tier_quantity2 0
+   :tier_price2    0
+   :tier_quantity3 0
+   :tier_price3    0})
+
+
+
+
 (defn upload-inventories [file]
   (->> (read-lines file parse-upload-instructions)
        (map #(apply validate-instructions %))
        (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
-          'a
-          'b
-          ;; ON PASS
-          ;;; Instructions -> Items
-          ;;; POST
-          ;; ON FAIL
-          ;;; Spit Intructions + Error
-          ))))
+          (->> (map ->items %)
+               ((fn [x] (html/html-post "/inventories" x (fn [res] (= nil res)) {})))
+               println)
+          (write-lines file (map first %))))))
+
+
 
 ; TODO:
 (defn update-inventories [file stockroom]
