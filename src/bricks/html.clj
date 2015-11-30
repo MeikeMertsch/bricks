@@ -14,9 +14,14 @@
 (defn html-get
   ([url] (html-get url nil))
   ([url params] (auth/retry #(->> (client/get (str const/base-url url)
-                                              (merge {:headers (auth/->header url params)}
+                                              (merge {:headers (auth/->header url params :GET)}
                                                      {:query-params params}))
                                   ->data) 10)))
 
 (defn html-post [url params]
-  (client/post (str const/base-url url) params))
+  (auth/retry #(->> (client/post (str const/base-url url)
+                                 (merge {:headers      (auth/->header url nil :POST)
+                                         :content-type "application/json"}
+                                        {:body (json/generate-string params)}))
+                    ->data)
+              10))
