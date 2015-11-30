@@ -10,7 +10,8 @@
                  [com.cemerick/url "0.1.1"]
                  [com.cemerick/url "0.1.1"]
                  [com.rpl/specter "0.7.1"]
-                 [expectations "2.1.2"]]
+                 [expectations "2.1.2"]
+                 [prismatic/schema "1.0.1"]]
   :main ^:skip-aot bricks.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
