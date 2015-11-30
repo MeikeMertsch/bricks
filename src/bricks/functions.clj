@@ -1,10 +1,9 @@
 (ns bricks.functions
-  (:require [cheshire.core :as json]
-            [bricks.constants :as const]
-            [clojure.java.io :as io]
-            [com.rpl.specter :as specter]
+  (:require [bricks.constants :as const]
             [bricks.html :as html]
-            [bricks.auth :as auth]))
+            [bricks.io :as io]
+            [cheshire.core :as json]
+            [com.rpl.specter :as specter]))
 
 (def colors (->> (slurp "resources/colors")
                  (#(json/parse-string % const/transform-to-keywords))))
@@ -22,15 +21,6 @@
                        :guide_type "sold"})
        :avg_price))
 
-
-(defn read-lines [file-name f]
-  (let [reader (io/reader file-name)]
-    (->> (line-seq reader)
-         (map f))))
-
-(defn write-lines [file-path lines]
-  (with-open [wtr (clojure.java.io/writer (str file-path "_changed"))]
-    (doseq [line lines] (.write wtr (str line "\n")))))
 
 
 (defn parse-upload-instructions [line]
@@ -85,15 +75,14 @@
 
 
 
-
 (defn upload-inventories [file]
-  (->> (read-lines file parse-upload-instructions)
+  (->> (io/read-lines file parse-upload-instructions)
        (map #(apply validate-instructions %))
        (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
           (->> (map ->items %)
-               ((fn [x] (html/html-post "/inventories" x (fn [res] (= nil res)) {})))
+               ((fn [x] (html/html-post "/inventories" x)))
                println)
-          (write-lines file (map first %))))))
+          (io/write-lines file (map first %))))))
 
 
 

@@ -21,5 +21,3 @@
 (expect true (known-color? "3002" 11))
 (expect false (known-color? "3069b" 159))
 
-
-(expect nil (upload-inventories "resources/Additions_75104"))

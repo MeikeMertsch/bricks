@@ -5,11 +5,11 @@
 
 (def oauth-secrets (json/parse-string (slurp "secrets") const/transform-to-keywords))
 
-(defn retry [f pred init max]
+(defn retry [f max]
   (loop [i 0
-         result init]
+         result nil]
     (if (or (>= i max)
-            (pred result))
+            (not= nil result))
       result
       (recur (inc i)
              (f)))))

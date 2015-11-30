@@ -17,17 +17,10 @@
                                               (merge {:headers (auth/->header url params :GET)}
                                                      {:query-params params}))
                                   ->data)
-                            #(not= nil %)
-                            nil
                             10)))
 
-(defn html-post [url params retry-pred retry-init]
-  ;(auth/retry #
-                  (->> (client/post (str const/base-url url)
-                                 (merge {:headers      (auth/->header url nil :POST)
-                                         :content-type "application/json"}
-                                        {:body (json/generate-string params)}))
-                    #_->data))
-             ; retry-pred
-             ; retry-init
-             ; 10))
+(defn html-post [url params]
+  (->> (client/post (str const/base-url url)
+                    (merge {:headers      (auth/->header url nil :POST)
+                            :content-type "application/json"}
+                           {:body (json/generate-string params)}))))
