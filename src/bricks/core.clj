@@ -18,3 +18,46 @@
                        :color_id   (color-id color)
                        :guide_type "sold"})
        :avg_price))
+
+; TODO:
+(defn upload-inventories [file]
+  ; Load file
+  ; Parse Instructions
+  ; Validate Instructions
+  ;; ON PASS
+  ;;; Instructions -> Items
+  ;;; POST
+  ;; ON FAIL
+  ;;; Spit Intructions + Error
+  )
+
+; TODO:
+(defn update-inventories [file stockroom]
+  ; Load file
+  ; Parse Instructions
+  ; Get Inventories in chosen stockroom
+  ; get Item by item-no & color_id
+  ; create update instructions per item
+  ; PUT
+  )
+
+; TODO:
+(defn delete-inventories [file stockroom]
+  ; Load file
+  ; Parse Instructions
+  ; Get Inventories in chosen stockroom
+  ; get Item by item-no & color_id
+  ; create delete instructions per item
+  ; DELETE
+  )
+
+; TODO:
+(defn change-pricing [sum-costs stockroom]
+  ; Get Inventories in chosen stockroom
+  ; Calculate Sum of Prices of parts
+  ; create Update instructions per Item
+  ; PUT
+  )
+
+
+
