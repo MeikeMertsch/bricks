@@ -7,7 +7,18 @@
 (expect Exception (color-id "lbg"))
 
 
-;;Should test for structure
+; Parse Instructions for upload
+(expect ["3701" 2 11] (parse-upload-instructions "3701;2;black"))
+(expect ["3069b" 9 86] (parse-upload-instructions "3069b;9;Light Bluish gray"))
+(expect NumberFormatException (parse-upload-instructions "9;3069b;light bluish gray"))
+
+
+
+
+
+
+
+;; Should test for structure
 
 (let [part-no "3795"
       color "light bluish gray"

@@ -1,14 +1,16 @@
 (ns bricks.core
   (:require [cheshire.core :as json]
             [bricks.constants :as const]
+            [clojure.java.io :as io]
             [com.rpl.specter :as specter]
             [bricks.html :as html]))
 
-(def colors (->> (slurp "resources/colors") (#(json/parse-string % const/transform-to-keywords))))
+(def colors (->> (slurp "resources/colors")
+                 (#(json/parse-string % const/transform-to-keywords))))
 
 (defn color-id [name]
-  (let [id
-  (peek (specter/select [specter/ALL #(= name (:color_name %)) :color_id] colors))]
+  (let [colors-->id [specter/ALL #(= (clojure.string/lower-case name) (:color_name %)) :color_id]
+        id (peek (specter/select colors-->id colors))]
     (if id id (throw (Exception. "The color isn't recognized")))))
 
 (defn price [number color]
@@ -19,17 +21,28 @@
                        :guide_type "sold"})
        :avg_price))
 
+(defn read-lines [file-name f]
+  (let [reader (io/reader file-name)]
+    (->> (line-seq reader)
+         (map f))))
+
+(defn parse-upload-instructions [line]
+  (let [[part amount color] (clojure.string/split line #";")
+        ->int #(int (bigint %))]
+    [part (->int amount) (color-id color)]))
+
+
+
 ; TODO:
 (defn upload-inventories [file]
-  ; Load file
-  ; Parse Instructions
-  ; Validate Instructions
-  ;; ON PASS
-  ;;; Instructions -> Items
-  ;;; POST
-  ;; ON FAIL
-  ;;; Spit Intructions + Error
-  )
+  (->> (read-lines file parse-upload-instructions)
+       ; Validate Instructions
+       ;; ON PASS
+       ;;; Instructions -> Items
+       ;;; POST
+       ;; ON FAIL
+       ;;; Spit Intructions + Error
+       ))
 
 ; TODO:
 (defn update-inventories [file stockroom]
