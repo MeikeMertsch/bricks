@@ -67,7 +67,18 @@
                println)
           (io/write-lines file (map first %))))))
 
+(defn part-out-set [set-no delete-file update-file]
+  ; Load set inventory
 
+  ; Parse Delete Instructions
+  ; Delete from set inventory
+
+  ; Parse Update Instructions
+  ; Update in set inventory
+
+  ; Create upload instructions
+  ; POST
+  )
 
 ; TODO:
 (defn update-inventories [file stockroom]
