@@ -92,14 +92,15 @@
 
 (defn part-out-set [set-no quantity delete-file update-file]
   (let [inventory (multiply-set (part-out set-no) quantity)
-        deletions (io/parse-lines-with-f delete-file parse-deletions)]
+        deletions (io/parse-lines-with-f delete-file parse-deletions)
+        updates (io/parse-lines-with-f update-file parse-upload-instructions)]
   ; Load set inventory
   ; Multiply by quantity
 
   ; Parse Delete Instructions
-  ; Delete from set inventory
-
   ; Parse Update Instructions
+
+  ; Delete from set inventory
   ; Update in set inventory
 
   ; Set Prices
