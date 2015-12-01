@@ -1,7 +1,7 @@
 (ns bricks.io
   (:require [clojure.java.io :as io]))
 
-(defn read-lines [file-name f]
+(defn parse-lines-with-f [file-name f]
   (let [reader (io/reader file-name)]
     (->> (line-seq reader)
          (map f))))

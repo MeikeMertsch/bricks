@@ -82,7 +82,7 @@
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions
-       (io/read-lines file)
+       (io/parse-lines-with-f file)
        (map #(apply validate-instructions %))
        (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
           (->> (map ->items %)
@@ -92,7 +92,7 @@
 
 (defn part-out-set [set-no quantity delete-file update-file]
   (let [inventory (multiply-set (part-out set-no) quantity)
-        deletions (parse-deletions (slurp delete-file))]
+        deletions (io/parse-lines-with-f delete-file parse-deletions)]
   ; Load set inventory
   ; Multiply by quantity
 
