@@ -7,6 +7,7 @@
        (filter #(not= "Modulex" (:color_type %)))
        (map #(dissoc % :color_code))
        (map #(update-in % [:color_name] clojure.string/lower-case))
+       (cons {:color_id 0 :color_name "minifig" :color_type "Special"})
        json/generate-string
        (spit "resources/colors")))
 
