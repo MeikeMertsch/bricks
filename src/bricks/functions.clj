@@ -4,6 +4,8 @@
             [bricks.io :as io]
             [cheshire.core :as json]))
 
+(defn ->int [string]
+  (int (bigint string)))
 
 (defn avg_price [number color-id]
   (->> (html/html-get (str "/items/part/" number "/price")
@@ -63,6 +65,9 @@
                   :no            set-no
                   :instruction   true
                   :break_subsets true}))
+
+(defn multiply-set [set times]
+  (map (fn [item] (update-in item [:entries 0 :quantity] #(* times (->int %)))) set))
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions
