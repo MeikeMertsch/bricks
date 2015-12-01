@@ -60,14 +60,15 @@
 
 
 (defn part-out [set-no]
-  (html/html-get (format "/items/set/%s/subsets" set-no)
+  (->> (html/html-get (format "/items/set/%s/subsets" set-no)
                  {:type          "set"
                   :no            set-no
                   :instruction   true
-                  :break_subsets true}))
+                  :break_subsets true})
+       (map #(get-in % [:entries 0]))))
 
 (defn multiply-set [set times]
-  (map (fn [item] (update-in item [:entries 0 :quantity] #(* times (->int %)))) set))
+  (map (fn [item] (update-in item [:quantity] #(* times (->int %)))) set))
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions
