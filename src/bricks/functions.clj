@@ -1,7 +1,8 @@
 (ns bricks.functions
   (:require [bricks.color :as color]
             [bricks.html :as html]
-            [bricks.io :as io]))
+            [bricks.io :as io]
+            [cheshire.core :as json]))
 
 
 (defn avg_price [number color-id]
@@ -56,6 +57,12 @@
    :tier_price3    0})
 
 
+(defn part-out [set-no]
+  (html/html-get (format "/items/set/%s/subsets" set-no)
+                 {:type          "set"
+                  :no            set-no
+                  :instruction   true
+                  :break_subsets true}))
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions
@@ -67,8 +74,9 @@
                println)
           (io/write-lines file (map first %))))))
 
-(defn part-out-set [set-no delete-file update-file]
+(defn part-out-set [set-no quantity delete-file update-file]
   ; Load set inventory
+  ; Multiply by quantity
 
   ; Parse Delete Instructions
   ; Delete from set inventory
