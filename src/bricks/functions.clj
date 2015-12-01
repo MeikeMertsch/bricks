@@ -16,10 +16,18 @@
        :avg_price))
 
 (defn parse-upload-instructions [line]
-  (let [[part qty color] (clojure.string/split line #";")
-        ->int #(int (bigint %))]
+  (let [[part qty color] (clojure.string/split line #";")]
     (try
       [line part (->int qty) (color/color-id color)]
+
+      (catch Exception e
+        (let [log (format "%s --> skipped: %s" line e)]
+          [log])))))
+
+(defn parse-deletions [line]
+  (let [[part color] (clojure.string/split line #";")]
+    (try
+      [line part (color/color-id color)]
 
       (catch Exception e
         (let [log (format "%s --> skipped: %s" line e)]
@@ -67,6 +75,8 @@
                   :break_subsets true})
        (map #(get-in % [:entries 0]))))
 
+
+
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (->int %)))) set))
 
@@ -81,7 +91,8 @@
           (io/write-lines file (map first %))))))
 
 (defn part-out-set [set-no quantity delete-file update-file]
-  (let [inventory (part-out set-no)]
+  (let [inventory (multiply-set (part-out set-no) quantity)
+        deletions (parse-deletions (slurp delete-file))]
   ; Load set inventory
   ; Multiply by quantity
 
@@ -90,6 +101,8 @@
 
   ; Parse Update Instructions
   ; Update in set inventory
+
+  ; Set Prices
 
   ; Create upload instructions
   ; POST

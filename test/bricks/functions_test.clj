@@ -16,9 +16,13 @@
 ; Validate Instructions
 (expect ["3069b;9;Light Bluish gray" "3069b" 9 86] (validate-instructions "3069b;9;Light Bluish gray" "3069b" 9 86))
 (expect ["9;3069b;light bluish gray --> skipped: Some Error"] (validate-instructions "9;3069b;light bluish gray --> skipped: Some Error"))
-(expect #(.startsWith (peek %) "3069b;9;glow in dark white --> skipped: color is not known for that part") (validate-instructions "3069b;9;glow in dark white" "3069b" 9 159))
+(expect ["3069b;9;glow in dark white --> skipped: color is not known for that part"] (validate-instructions "3069b;9;glow in dark white" "3069b" 9 159))
 
 ; Multiply Inventory with Count of Sets
 (let [set (slurp-res "set-inventory")
       set-times-5 (slurp-res "set-inventory-times-5")]
   (expect set-times-5 (multiply-set set 5)))
+
+; Parse Instructions for Deletion
+(expect ["3701;black" "3701" 11] (parse-deletions "3701;black"))
+(expect ["frnd088;minifig" "frnd088" 0] (parse-deletions "frnd088;minifig"))
