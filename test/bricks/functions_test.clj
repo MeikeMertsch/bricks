@@ -1,4 +1,4 @@
-(ns bricks.core-test
+(ns bricks.functions-test
   (:require [bricks.functions :refer :all]
             [expectations :refer :all]))
 

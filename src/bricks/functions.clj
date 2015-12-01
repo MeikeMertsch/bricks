@@ -75,6 +75,7 @@
           (io/write-lines file (map first %))))))
 
 (defn part-out-set [set-no quantity delete-file update-file]
+  (let [inventory (part-out set-no)]
   ; Load set inventory
   ; Multiply by quantity
 
@@ -86,7 +87,7 @@
 
   ; Create upload instructions
   ; POST
-  )
+  ))
 
 ; TODO:
 (defn update-inventories [file stockroom]
