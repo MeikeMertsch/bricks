@@ -69,16 +69,27 @@
 
 (defn part-out [set-no]
   (->> (html/html-get (format "/items/set/%s/subsets" set-no)
-                 {:type          "set"
-                  :no            set-no
-                  :instruction   true
-                  :break_subsets true})
+                      {:type          "set"
+                       :no            set-no
+                       :instruction   true
+                       :break_subsets true})
        (map #(get-in % [:entries 0]))))
 
 
 
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (->int %)))) set))
+
+(defn delete-in-set [set instructions]
+  (loop [instructions instructions
+         set set]
+    (if (empty? instructions)
+      set
+      (recur (rest instructions)
+             (let [[_ part color-id] (first instructions)]
+               (remove (fn [item] (and (= color-id (:color_id item))
+                                       (= part (:no (:item item))))) set))))))
+
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions
@@ -94,20 +105,20 @@
   (let [inventory (multiply-set (part-out set-no) quantity)
         deletions (io/parse-lines-with-f delete-file parse-deletions)
         updates (io/parse-lines-with-f update-file parse-upload-instructions)]
-  ; Load set inventory
-  ; Multiply by quantity
+    ; Load set inventory
+    ; Multiply by quantity
 
-  ; Parse Delete Instructions
-  ; Parse Update Instructions
+    ; Parse Delete Instructions
+    ; Parse Update Instructions
 
-  ; Delete from set inventory
-  ; Update in set inventory
+    ; Delete from set inventory
+    ; Update in set inventory
 
-  ; Set Prices
+    ; Set Prices
 
-  ; Create upload instructions
-  ; POST
-  ))
+    ; Create upload instructions
+    ; POST
+    ))
 
 ; TODO:
 (defn update-inventories [file stockroom]

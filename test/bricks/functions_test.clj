@@ -26,3 +26,9 @@
 ; Parse Instructions for Deletion
 (expect ["3701;black" "3701" 11] (parse-deletions "3701;black"))
 (expect ["frnd088;minifig" "frnd088" 0] (parse-deletions "frnd088;minifig"))
+
+; Delete from set inventory
+(let [set (slurp-res "minifig-set")
+      reduced-set (slurp-res "minifig-set-no-minifig")]
+  (expect reduced-set (delete-in-set set [["loc127;minifig" "loc127" 0]]))
+  (expect set (delete-in-set set [["bcc1;black" "bcc1" 11]])))
