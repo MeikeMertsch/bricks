@@ -38,4 +38,9 @@
       updated-set (slurp-res "minifig-set-five-minifigs")]
   (expect updated-set (update-in-set set [["loc127;5;minifig" "loc127" 5 0]])))
 
+; Calculate Sum of parts
+(let [set (slurp-res "set-inventory")]
+  (expect 23 (count-parts set)))
 
+(let [set (slurp-res "set-inventory")]
+(expect nil (->upload-instruction (first set))))

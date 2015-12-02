@@ -67,6 +67,10 @@
    :tier_quantity3 0
    :tier_price3    0})
 
+(defn ->upload-instruction [item]
+  )
+
+
 
 (defn part-out [set-no]
   (->> (html/html-get (format "/items/set/%s/subsets" set-no)
@@ -102,6 +106,9 @@
                                                          (= part (:no (:item item))))) :quantity]]
                (specter/setval selector qty set))))))
 
+(defn count-parts [set]
+  (reduce (fn [sum {qty :quantity}] (+ sum (->int qty))) 0 set))
+
 (defn upload-inventories [file]
   (->> parse-upload-instructions
        (io/parse-lines-with-f file)
@@ -116,7 +123,8 @@
   (let [inventory (multiply-set (part-out set-no) quantity)
         deletions (io/parse-lines-with-f delete-file parse-deletions)
         updates (io/parse-lines-with-f update-file parse-upload-instructions)]
-    (delete-in-set inventory deletions)
+    (-> (delete-in-set inventory deletions)
+        (update-in-set updates))
 
     ; Load set inventory
     ; Multiply by quantity
@@ -127,7 +135,7 @@
     ; Delete from set inventory
     ; Update in set inventory
 
-    ; Set Prices
+    ; Calculate Sum of parts
 
     ; Create upload instructions
     ; POST
