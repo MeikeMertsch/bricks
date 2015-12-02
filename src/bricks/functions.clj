@@ -106,7 +106,7 @@
         deletions (io/parse-lines-with-f delete-file parse-deletions)
         updates (io/parse-lines-with-f update-file parse-upload-instructions)]
     (delete-in-set inventory deletions)
-    
+
     ; Load set inventory
     ; Multiply by quantity
 
