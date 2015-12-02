@@ -2,7 +2,8 @@
   (:require [bricks.color :as color]
             [bricks.html :as html]
             [bricks.io :as io]
-            [cheshire.core :as json]))
+            [cheshire.core :as json]
+            [com.rpl.specter :as specter]))
 
 (defn ->int [string]
   (int (bigint string)))
@@ -90,6 +91,16 @@
                (remove (fn [item] (and (= color-id (:color_id item))
                                        (= part (:no (:item item))))) set))))))
 
+(defn update-in-set [set instructions]
+  (loop [instructions instructions
+         set set]
+    (if (empty? instructions)
+      set
+      (recur (rest instructions)
+             (let [[_ part qty color-id] (first instructions)
+                   selector [specter/ALL (fn [item] (and (= color-id (:color_id item))
+                                                         (= part (:no (:item item))))) :quantity]]
+               (specter/setval selector qty set))))))
 
 (defn upload-inventories [file]
   (->> parse-upload-instructions

@@ -32,3 +32,10 @@
       reduced-set (slurp-res "minifig-set-no-minifig")]
   (expect reduced-set (delete-in-set set [["loc127;minifig" "loc127" 0]]))
   (expect set (delete-in-set set [["bcc1;black" "bcc1" 11]])))
+
+; Update in set inventory
+(let [set (slurp-res "minifig-set")
+      updated-set (slurp-res "minifig-set-five-minifigs")]
+  (expect updated-set (update-in-set set [["loc127;5;minifig" "loc127" 5 0]])))
+
+
