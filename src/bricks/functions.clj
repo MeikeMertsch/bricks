@@ -31,34 +31,3 @@
 
 
 ;(println (part-out-set "41040-21" 2 "resources/file-deletions" "resources/file-updates" "resources/file-additions" 20))
-
-; TODO:
-(defn update-inventories [file stockroom]
-  ; Load file
-  ; Parse Instructions
-  ; Get Inventories in chosen stockroom
-  ; get Item by item-no & color_id
-  ; create update instructions per item
-  ; PUT
-  )
-
-; TODO:
-(defn delete-inventories [file stockroom]
-  ; Load file
-  ; Parse Instructions
-  ; Get Inventories in chosen stockroom
-  ; get Item by item-no & color_id
-  ; create delete instructions per item
-  ; DELETE
-  )
-
-; TODO:
-(defn change-pricing [sum-costs stockroom]
-  ; Get Inventories in chosen stockroom
-  ; Calculate Sum of Prices of parts
-  ; create Update instructions per Item
-  ; PUT
-  )
-
-
-
