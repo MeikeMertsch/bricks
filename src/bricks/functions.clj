@@ -1,170 +1,32 @@
 (ns bricks.functions
-  (:require [bricks.color :as color]
-            [bricks.html :as html]
+  (:require [bricks.html :as html]
             [bricks.io :as io]
-            [cheshire.core :as json]
-            [com.rpl.specter :as specter]))
+            [bricks.sets :as sets]
+            [bricks.conversion :as conv]))
 
-(defn ->int [string]
-  (int (bigint string)))
-
-(defn avg_price [number color-id]
-  (->> (html/html-get (str "/items/part/" number "/price")
-                      {:type       "part"
-                       :no         number
-                       :color_id   color-id
-                       :guide_type "sold"})
-       :avg_price))
-
-(defn parse-upload-instructions [line]
-  (let [[part qty color] (clojure.string/split line #";")]
-    (try
-      [line part (->int qty) (color/color-id color)]
-
-      (catch Exception e
-        (let [log (format "%s --> skipped: %s" line e)]
-          [log])))))
-
-(defn parse-deletions [line]
-  (let [[part color] (clojure.string/split line #";")]
-    (try
-      [line part (color/color-id color)]
-
-      (catch Exception e
-        (let [log (format "%s --> skipped: %s" line e)]
-          [log])))))
-
-(defn validate-instructions
-  ([log] [log])
-  ([line part quantity color-id]
-   (let [log #(format "%s --> skipped: %s" line %)]
-     (try
-       (if (color/known-color? part color-id)
-         [line part quantity color-id]
-         [(log "color is not known for that part")])
-       (catch Exception e
-         [(log e)])))))
-
-(defn ->items [[_ part quantity color-id]]
-  {:item           {:no   part
-                    :type "part"}
-   :color_id       color-id
-   :quantity       quantity
-   :unit_price     (avg_price part color-id)
-   :new_or_used    "N"
-   :description    ""
-   :remarks        ""
-   :bulk           1
-   :is_retain      false
-   :is_stock_room  true
-   :stock_room_id  "B"
-   :my_cost        0.0
-   :sale_rate      0
-   :tier_quantity1 0
-   :tier_price1    0
-   :tier_quantity2 0
-   :tier_price2    0
-   :tier_quantity3 0
-   :tier_price3    0})
-
-
-(defn ->upload-instruction [unit-price
-                            {quantity              :quantity
-                             color-id              :color_id
-                             {part :no type :type} :item}]
-  {:item           {:no   part
-                    :type type}
-   :color_id       color-id
-   :quantity       quantity
-   :unit_price     unit-price
-   :new_or_used    "N"
-   :description    ""
-   :remarks        ""
-   :bulk           1
-   :is_retain      false
-   :is_stock_room  true
-   :stock_room_id  "B"
-   :my_cost        0.0
-   :sale_rate      0
-   :tier_quantity1 0
-   :tier_price1    0
-   :tier_quantity2 0
-   :tier_price2    0
-   :tier_quantity3 0
-   :tier_price3    0})
-
-
-
-(defn part-out [set-no]
-  (->> (html/html-get (format "/items/set/%s/subsets" set-no)
-                      {:type          "set"
-                       :no            set-no
-                       :instruction   true
-                       :break_subsets true})
-       (map #(get-in % [:entries 0]))))
-
-
-
-(defn multiply-set [set times]
-  (map (fn [item] (update-in item [:quantity] #(* times (->int %)))) set))
-
-(defn delete-in-set [set instructions]
-  (loop [instructions instructions
-         set set]
-    (if (empty? instructions)
-      set
-      (recur (rest instructions)
-             (let [[_ part color-id] (first instructions)]
-               (remove (fn [item] (and (= color-id (:color_id item))
-                                       (= part (:no (:item item))))) set))))))
-
-(defn update-in-set [set instructions]
-  (loop [instructions instructions
-         set set]
-    (if (empty? instructions)
-      set
-      (recur (rest instructions)
-             (let [[_ part qty color-id] (first instructions)
-                   selector [specter/ALL (fn [item] (and (= color-id (:color_id item))
-                                                         (= part (:no (:item item))))) :quantity]]
-               (specter/setval selector qty set))))))
-
-(defn count-parts [set]
-  (reduce (fn [sum {qty :quantity}] (+ sum (->int qty))) 0 set))
 
 (defn upload-inventories [file]
-  (->> parse-upload-instructions
+  (->> io/parse-upload-instructions
        (io/parse-lines-with-f file)
-       (map #(apply validate-instructions %))
+       (map #(apply sets/validate-instructions %))
        (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
-          (->> (map ->items %)
+          (->> (map conv/->items %)
                ((fn [x] (html/html-post "/inventories" x)))
                println)
           (io/write-lines file (map first %))))))
 
-(defn part-out-set [set-no quantity delete-file update-file margin-set-price]
-  (let [inventory (multiply-set (part-out set-no) quantity)
-        deletions (io/parse-lines-with-f delete-file parse-deletions)
-        updates (io/parse-lines-with-f update-file parse-upload-instructions)]
-    (-> (delete-in-set inventory deletions)
-        (update-in-set updates)
-        (#(let [sum-parts (count-parts %)
+(defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
+  (let [inventory (sets/multiply-set (sets/part-out set-no) quantity)
+        deletions (io/parse-lines-with-f delete-file io/parse-deletions)
+        updates (io/parse-lines-with-f update-file io/parse-upload-instructions)
+        additions (io/parse-lines-with-f additions-file io/parse-upload-instructions)]
+    (-> (sets/delete-in-set inventory deletions)
+        (sets/update-in-set updates)
+        (sets/add-in-set additions)
+        (#(let [sum-parts (sets/count-parts %)
                 price (* margin-set-price quantity)
                 unit-price (/ price sum-parts)]
-           (map (partial ->upload-instruction unit-price) %)))
-
-        ; Load set inventory
-        ; Multiply by quantity
-
-        ; Parse Delete Instructions
-        ; Parse Update Instructions
-
-        ; Delete from set inventory
-        ; Update in set inventory
-
-        ; Calculate Sum of parts
-
-        ; Create upload instructions
+           (map (partial conv/->upload-instruction unit-price) %)))
         ; POST
         )))
 
