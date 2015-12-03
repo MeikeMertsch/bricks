@@ -12,7 +12,7 @@
   (with-open [wtr (clojure.java.io/writer (str file-path "_changed"))]
     (doseq [line lines] (.write wtr (str line "\n")))))
 
-(defn parse-upload-instructions [line]
+(defn parse-updates [line]
   (let [[part qty color] (clojure.string/split line #";")]
     (try
       [line part (conv/->int qty) (color/color-id color)]

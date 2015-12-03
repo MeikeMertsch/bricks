@@ -6,7 +6,7 @@
 
 
 (defn upload-inventories [file]
-  (->> io/parse-upload-instructions
+  (->> io/parse-updates
        (io/parse-lines-with-f file)
        (map #(apply sets/validate-instructions %))
        (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
@@ -18,8 +18,8 @@
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [inventory (sets/multiply-set (sets/part-out set-no) quantity)
         deletions (io/parse-lines-with-f delete-file io/parse-deletions)
-        updates (io/parse-lines-with-f update-file io/parse-upload-instructions)
-        additions (io/parse-lines-with-f additions-file io/parse-upload-instructions)]
+        updates (io/parse-lines-with-f update-file io/parse-updates)
+        additions (io/parse-lines-with-f additions-file io/parse-updates)]
     (-> (sets/delete-in-set inventory deletions)
         (sets/update-in-set updates)
         (sets/add-in-set additions)
