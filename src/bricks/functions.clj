@@ -26,9 +26,11 @@
         (#(let [sum-parts (sets/count-parts %)
                 price (* margin-set-price quantity)
                 unit-price (/ price sum-parts)]
-           (map (partial conv/->upload-instruction unit-price) %)))
-        ; POST
-        )))
+           (->> (map (partial conv/->upload-instruction unit-price) %)
+           (html/html-post "/inventories")))))))
+
+
+;(println (part-out-set "41040-21" 2 "resources/file-deletions" "resources/file-updates" "resources/file-additions" 20))
 
 ; TODO:
 (defn update-inventories [file stockroom]
