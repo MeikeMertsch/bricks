@@ -33,3 +33,10 @@
       new-items [{:item {:no "3701" :type "PART"} :color_id 11 :quantity 2}]
       instructions [["3701;2;black" "3701" 2 11]]]
   (expect (concat set new-items) (add-in-set set instructions)))
+
+; Validitiy of Instructions
+(let [good-instruction ["3701;2;black" "3701" 2 11]
+      invalid-instruction ["3069b;9;glow in dark white --> skipped: color is not known for that part"]]
+  (expect true (all-valid? [good-instruction good-instruction]))
+  (expect false (all-valid? [invalid-instruction good-instruction]))
+  (expect true (all-valid? [])))
