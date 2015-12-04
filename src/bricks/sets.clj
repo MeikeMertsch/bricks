@@ -70,15 +70,12 @@
                 (= (:type (:item item)) (:type (:item %))))
           inventory))
 
-(defn add-item-f [inventory item]
-  )
-
-
 (defn check-inventory [set inventory]
   set
-  (loop [index 0
-         set set]
-    (if (<= index (count set))
-      set
-      (recur (inc index)
-             (identity set)))))
+  (loop [set set
+         result []]
+    (if (empty? set)
+      result
+      (recur (rest set)
+             (let [item (first set)]
+               (conj result (conj (find-in inventory item) item)))))))

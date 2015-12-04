@@ -2,12 +2,10 @@
   (:require [bricks.html :as html]
             [bricks.io :as io]
             [bricks.sets :as sets]
-            [bricks.conversion :as conv]
-            [cheshire.core :as json]))
+            [bricks.conversion :as conv]))
 
 (defn download-inventories []
   (html/html-get "/inventories"))
-
 
 
 (defn upload-inventories [file]
@@ -31,14 +29,21 @@
         updates (io/parse-lines-with-f update-file io/parse-updates)
         additions (io/parse-lines-with-f additions-file io/parse-updates)
         inventory (download-inventories)]
-    (-> (sets/delete-in-set set deletions) ; needs error handling
-        (sets/update-in-set updates) ; needs error handling
+    (-> (sets/delete-in-set set deletions)                  ; needs error handling
+        (sets/update-in-set updates)                        ; needs error handling
         (sets/add-in-set additions)
-        ;; compare with current online inventory
-        ;; sort out additions vs. updates of existing inventory
-        (#(->> (map (partial conv/->upload-instruction
-                             (unit-price % margin-set-price quantity)) %)
-               (html/html-post "/inventories"))))))
+        (#(map (partial conv/->upload-instruction
+                        (unit-price % margin-set-price quantity))
+               %))
+        (sets/check-inventory inventory)
+        (#(let [items-to-add (filter (fn [item] (= 1 (count item))) %)
+                items-to-update (filter (fn [item] (not= 1 (count item))) %)]
+           (html/html-post "/inventories" items-to-add)
+           (println items-to-update))))))
+
+          ; (->> () ; consolidate
+          ;      ())))))) ; PUT
+
 
 
 ;(println (part-out-set "41040-21" 2 "resources/file-deletions" "resources/file-updates" "resources/file-additions" 20))

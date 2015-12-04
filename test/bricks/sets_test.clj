@@ -1,7 +1,8 @@
 (ns bricks.sets-test
   (:require [bricks.sets :refer :all]
             [expectations :refer :all]
-            [bricks.test-tools :refer :all]))
+            [bricks.test-tools :refer :all]
+            [bricks.conversion :as conv]))
 
 ; Validate Instructions
 (expect ["3069b;9;Light Bluish gray" "3069b" 9 86] (validate-instructions "3069b;9;Light Bluish gray" "3069b" 9 86))
@@ -41,14 +42,19 @@
   (expect false (all-valid? [invalid-instruction good-instruction]))
   (expect true (all-valid? [])))
 
-;; Compare with current online inventory
-#_(let [set [(slurp-res "set-inventory")]
-        inventory [(nth (slurp-res "set-inventory") 5)]]
-    (expect (assoc (first inventory) :update true)
-            (in (check-inventory set inventory))))
-
-;; Compare with current online inventory
+;; Find in current online inventory
 (let [inventory (slurp-res "inventory")
       item {:item {:no "2736" :type "PART"} :color_id 86}]
   (expect (:item item) (in (:item (first (find-in inventory item)))))
-  (expect (:color_id item) (:color_id (first (find-in inventory item)))))
+  (expect (:color_id item) (:color_id (first (find-in inventory item))))
+  (expect [] (find-in inventory {:item {:no "2736" :type "Something Strange"} :color_id 86})))
+
+;; Compare with current online inventory
+(let [set (concat (take 3 (rest (slurp-res "set-inventory"))) [(conv/->item [nil "2736" 10 86])
+                                                        (conv/->item [nil "3002" 1 0])])
+      inventory (slurp-res "inventory")
+      processed-set (check-inventory set inventory)]
+  (expect 4 (count (filter #(= 1 (count %)) processed-set)))
+  (expect 1 (count (filter #(< 1 (count %)) processed-set)))
+  (expect 0 (count (filter #(< (count %) 1) processed-set))))
+
