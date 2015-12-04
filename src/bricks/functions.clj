@@ -27,7 +27,13 @@
                 price (* margin-set-price quantity)
                 unit-price (/ price sum-parts)]
            (->> (map (partial conv/->upload-instruction unit-price) %)
-           (html/html-post "/inventories")))))))
+                (html/html-post "/inventories")))))))
 
 
 ;(println (part-out-set "41040-21" 2 "resources/file-deletions" "resources/file-updates" "resources/file-additions" 20))
+
+;(println (part-out-set "Swmagpromo-1" 93 "resources/empty" "resources/empty" "resources/empty" 12.5))
+;(println (part-out-set "30256-1" 21 "resources/30256-1-deletions" "resources/30256-1-updates" "resources/empty" 27.5))
+;(println (part-out-set "5994-1" 75 "resources/empty" "resources/5994-1-updates" "resources/empty" 21.04))
+;(println (part-out-set "41044-1" 10 "resources/41044-1-deletions" "resources/41044-1-updates" "resources/41044-1-additions" ))
+;(println (part-out-set "75104-1" 1 "resources/75104-1-deletions" "resources/75104-1-updates" "resources/75104-1-additions" 937.5))
