@@ -25,9 +25,11 @@
         deletions (io/parse-lines-with-f delete-file io/parse-deletions)
         updates (io/parse-lines-with-f update-file io/parse-updates)
         additions (io/parse-lines-with-f additions-file io/parse-updates)]
-    (-> (sets/delete-in-set set deletions)
-        (sets/update-in-set updates)
+    (-> (sets/delete-in-set set deletions) ; needs error handling
+        (sets/update-in-set updates) ; needs error handling
         (sets/add-in-set additions)
+        ;; compare with current online inventory
+        ;; sort out additions vs. updates of existing inventory
         (#(->> (map (partial conv/->upload-instruction
                              (unit-price % margin-set-price quantity)) %)
                (html/html-post "/inventories"))))))
