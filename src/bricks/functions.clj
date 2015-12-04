@@ -2,7 +2,12 @@
   (:require [bricks.html :as html]
             [bricks.io :as io]
             [bricks.sets :as sets]
-            [bricks.conversion :as conv]))
+            [bricks.conversion :as conv]
+            [cheshire.core :as json]))
+
+(defn download-inventories []
+  (html/html-get "/inventories"))
+
 
 
 (defn upload-inventories [file]
@@ -24,7 +29,8 @@
   (let [set (sets/multiply-set (sets/part-out set-no) quantity)
         deletions (io/parse-lines-with-f delete-file io/parse-deletions)
         updates (io/parse-lines-with-f update-file io/parse-updates)
-        additions (io/parse-lines-with-f additions-file io/parse-updates)]
+        additions (io/parse-lines-with-f additions-file io/parse-updates)
+        inventory (download-inventories)]
     (-> (sets/delete-in-set set deletions) ; needs error handling
         (sets/update-in-set updates) ; needs error handling
         (sets/add-in-set additions)

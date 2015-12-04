@@ -63,3 +63,22 @@
 
 (defn count-parts [set]
   (reduce (fn [sum {qty :quantity}] (+ sum (conv/->int qty))) 0 set))
+
+(defn find-in [inventory item]
+  (filter #(and (= (:color_id item) (:color_id %))
+                (= (:no (:item item)) (:no (:item %)))
+                (= (:type (:item item)) (:type (:item %))))
+          inventory))
+
+(defn add-item-f [inventory item]
+  )
+
+
+(defn check-inventory [set inventory]
+  set
+  (loop [index 0
+         set set]
+    (if (<= index (count set))
+      set
+      (recur (inc index)
+             (identity set)))))

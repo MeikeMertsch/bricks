@@ -40,3 +40,15 @@
   (expect true (all-valid? [good-instruction good-instruction]))
   (expect false (all-valid? [invalid-instruction good-instruction]))
   (expect true (all-valid? [])))
+
+;; Compare with current online inventory
+#_(let [set [(slurp-res "set-inventory")]
+        inventory [(nth (slurp-res "set-inventory") 5)]]
+    (expect (assoc (first inventory) :update true)
+            (in (check-inventory set inventory))))
+
+;; Compare with current online inventory
+(let [inventory (slurp-res "inventory")
+      item {:item {:no "2736" :type "PART"} :color_id 86}]
+  (expect (:item item) (in (:item (first (find-in inventory item)))))
+  (expect (:color_id item) (:color_id (first (find-in inventory item)))))
