@@ -3,7 +3,8 @@
             [bricks.io :as io]
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
-            [bricks.constants :as const]))
+            [bricks.constants :as const]
+            [bricks.color :as color]))
 
 (defn download-inventories []
   (html/html-get "/inventories"))
@@ -26,6 +27,18 @@
                    {:quantity (str "+" (:quantity new)) :unit_price new-price})))
 
 
+(defn sort-update-file [file]
+  (->> (io/parse-lines-with-f file io/parse-updates)
+       (sort-by (juxt second #(color/color-name (last %))))
+       (map first)
+       (io/write-lines file)))
+
+;(sort-update-file "resources/30256-1-updates")
+;(sort-update-file "resources/5994-1-updates")
+;(sort-update-file "resources/75104-1-updates")
+;(sort-update-file "resources/41044-1-updates")
+;(sort-update-file "resources/41040-1-updates")
+;(sort-update-file "resources/41102-1-updates")
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [set (sets/multiply-set (sets/part-out set-no) quantity)
@@ -44,7 +57,6 @@
                 items-to-update (filter (fn [item] (not= 1 (count item))) %)]
            (html/html-post "/inventories" items-to-add)
            (push-update items-to-update))))))
-
 
 ;(part-out-set "Swmagpromo-1" 93 const/empty-file const/empty-file const/empty-file 15.625)
 ;(part-out-set "30256-1" 21 "resources/30256-1-deletions" "resources/30256-1-updates" const/empty-file 34.375)
