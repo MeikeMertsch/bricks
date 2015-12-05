@@ -12,17 +12,6 @@
        (with-precision 10)
        (format "%.2f")))
 
-
-(defn upload-inventories [file]
-  (->> io/parse-updates
-       (io/parse-lines-with-f file)
-       (map #(apply sets/validate-instructions %))
-       (#(if (empty? (filter (fn [item] (= 1 (count item))) %))
-          (->> (map conv/->items %)
-               ((fn [x] (html/html-post "/inventories" x)))
-               println)
-          (io/write-lines file (map first %))))))
-
 (defn pcs-price [set margin-set-price quantity]
   (let [sum-parts (sets/count-parts set)
         price (* margin-set-price quantity)]
@@ -60,8 +49,6 @@
            (html/html-post "/inventories" items-to-add)
            (push-update items-to-update))))))
 
-
-;(println (part-out-set "41040-21" 2 "resources/file-deletions" "resources/file-updates" "resources/file-additions" 20))
 
 ;(part-out-set "Swmagpromo-1" 93 const/empty-file const/empty-file const/empty-file 12.5)
 ;(part-out-set "30256-1" 21 "resources/30256-1-deletions" "resources/30256-1-updates" const/empty-file 27.5)

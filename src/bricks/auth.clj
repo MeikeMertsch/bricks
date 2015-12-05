@@ -1,8 +1,7 @@
 (ns bricks.auth
   (:require [bricks.constants :as const]
             [oauth.client :as oauth]
-            [cheshire.core :as json]
-            [clj-http.client :as client]))
+            [cheshire.core :as json]))
 
 (def oauth-secrets (json/parse-string (slurp "secrets") const/transform-to-keywords))
 
@@ -16,8 +15,7 @@
   (loop [i 0
          html-answer {:body "{\"meta\":{\"code\":404}}}"}]
     (if (<= 200 (:code (->meta html-answer)) 299)
-      (do (println i)
-          html-answer)
+      html-answer
       (if (<= max i)
         (:meta html-answer)
         (recur (inc i)
