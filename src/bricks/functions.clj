@@ -2,21 +2,17 @@
   (:require [bricks.html :as html]
             [bricks.io :as io]
             [bricks.sets :as sets]
-            [bricks.conversion :as conv]))
+            [bricks.conversion :as conv]
+            [bricks.constants :as const]))
 
 (defn download-inventories []
   (html/html-get "/inventories"))
 
-(defn divide [divisor dividend]
-  (->> (/ divisor dividend)
-       (with-precision 10)
-       (format "%.2f")))
-
-(defn pcs-price [set margin-set-price quantity]
-  (let [sum-parts (sets/count-parts set)
+(defn lot-price [set margin-set-price quantity]
+  (let [sum-lots (count set)
         price (* margin-set-price quantity)]
-    (println (format "%s parts in %s sets with price: %s" sum-parts quantity margin-set-price))
-    (divide price sum-parts)))
+    (println (format "%s lots in %s sets with price: %s" sum-lots quantity margin-set-price))
+    (conv/divide price sum-lots)))
 
 (defn push-update [items-to-update]
   (for [item items-to-update
@@ -25,7 +21,7 @@
               total-pcs (+ (:quantity old) (:quantity new))
               price-sum (+ (* (:quantity old) (bigdec (:unit_price old)))
                            (* (:quantity new) (bigdec (:unit_price new))))
-              new-price (divide price-sum total-pcs)]]
+              new-price (conv/divide price-sum total-pcs)]]
     (html/html-put (str "/inventories/" (:inventory_id old))
                    {:quantity (str "+" (:quantity new)) :unit_price new-price})))
 
@@ -41,7 +37,7 @@
         (sets/update-in-set updates)                        ; needs error handling
         (sets/add-in-set additions)
         (#(map (partial conv/->upload-instruction
-                        (pcs-price % margin-set-price quantity))
+                        (lot-price % margin-set-price quantity))
                %))
         (sets/check-inventory inventory)
         (#(let [items-to-add (map first (filter (fn [item] (= 1 (count item))) %))
@@ -50,10 +46,10 @@
            (push-update items-to-update))))))
 
 
-;(part-out-set "Swmagpromo-1" 93 const/empty-file const/empty-file const/empty-file 12.5)
-;(part-out-set "30256-1" 21 "resources/30256-1-deletions" "resources/30256-1-updates" const/empty-file 27.5)
-;(part-out-set "5994-1" 75 const/empty-file "resources/5994-1-updates" const/empty-file 21.04)
-;(part-out-set "75104-1" 1 "resources/75104-1-deletions" "resources/75104-1-updates" "resources/75104-1-additions" 937.5)
-
-;(part-out-set "41044-1" 10 "resources/41044-1-deletions" "resources/41044-1-updates" "resources/41044-1-additions" )
-;(part-out-set "41040-1" 3 "resources/41040-1-deletions" "resources/41040-1-updates" const/empty-file )
+;(part-out-set "Swmagpromo-1" 93 const/empty-file const/empty-file const/empty-file 15.625)
+;(part-out-set "30256-1" 21 "resources/30256-1-deletions" "resources/30256-1-updates" const/empty-file 34.375)
+;(part-out-set "5994-1" 75 const/empty-file "resources/5994-1-updates" const/empty-file 26.3)
+;(part-out-set "75104-1" 1 "resources/75104-1-deletions" "resources/75104-1-updates" "resources/75104-1-additions" 1171.875)
+;(part-out-set "41044-1" 10 "resources/41044-1-deletions" "resources/41044-1-updates" "resources/41044-1-additions" 31.25)
+;(part-out-set "41040-1" 3 "resources/41040-1-deletions" "resources/41040-1-updates" "resources/41040-1-additions" 236.25)
+;(part-out-set "41102-1" 7 "resources/41102-1-deletions" "resources/41102-1-updates" const/empty-file )

@@ -1,5 +1,11 @@
 (ns bricks.conversion)
 
+(defn divide [divisor dividend]
+  (->> (/ divisor dividend)
+       (with-precision 10)
+       (format "%.2f")))
+
+
 (defn ->int [string]
   (int (bigint string)))
 
@@ -8,7 +14,7 @@
    :color_id color-id
    :quantity quantity})
 
-(defn ->upload-instruction [unit-price
+(defn ->upload-instruction [lot-price
                             {quantity              :quantity
                              color-id              :color_id
                              {part :no type :type} :item}]
@@ -16,7 +22,7 @@
                     :type type}
    :color_id       color-id
    :quantity       quantity
-   :unit_price     unit-price
+   :unit_price     (divide (bigdec lot-price) quantity)
    :new_or_used    "N"
    :description    ""
    :remarks        ""
