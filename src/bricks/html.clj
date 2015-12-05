@@ -13,14 +13,27 @@
 
 (defn html-get
   ([url] (html-get url nil))
-  ([url params] (auth/retry #(->> (client/get (str const/base-url url)
+  ([url params] (->> (auth/retry #(client/get (str const/base-url url)
                                               (merge {:headers (auth/->header url params :GET)}
-                                                     {:query-params params}))
-                                  ->data)
-                            10)))
+                                                     {:query-params params})) 10)
+                     ->data)))
 
 (defn html-post [url params]
-  (->> (client/post (str const/base-url url)
-                    (merge {:headers      (auth/->header url nil :POST)
-                            :content-type "application/json"}
-                           {:body (json/generate-string params)}))))
+  (println (format "POST result: %s params: %s"
+                   (auth/->meta (auth/retry #(client/post (str const/base-url url)
+                                                          (merge {:headers      (auth/->header url nil :POST)
+                                                                  :content-type "application/json"}
+                                                                 {:body (json/generate-string params)}))
+                                            10))
+                   params)))
+
+
+(defn html-put [url params]
+  (println (format "PUT result: %s url: %s params: %s"
+                   (auth/->meta (auth/retry #(client/put (str const/base-url url)
+                                                         (merge {:headers      (auth/->header url nil :PUT)
+                                                                 :content-type "application/json"}
+                                                                {:body (json/generate-string params)}))
+                                            10))
+                   url
+                   params)))

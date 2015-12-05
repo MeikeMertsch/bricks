@@ -1,18 +1,28 @@
 (ns bricks.auth
   (:require [bricks.constants :as const]
             [oauth.client :as oauth]
-            [cheshire.core :as json]))
+            [cheshire.core :as json]
+            [clj-http.client :as client]))
 
 (def oauth-secrets (json/parse-string (slurp "secrets") const/transform-to-keywords))
 
+
+(defn ->meta [html-answer]
+  (-> (:body html-answer)
+      (json/parse-string const/transform-to-keywords)
+      :meta))
+
 (defn retry [f max]
   (loop [i 0
-         result nil]
-    (if (or (>= i max)
-            (not= nil result))
-      result
-      (recur (inc i)
-             (f)))))
+         html-answer {:body "{\"meta\":{\"code\":404}}}"}]
+    (if (<= 200 (:code (->meta html-answer)) 299)
+      (do (println i)
+          html-answer)
+      (if (<= max i)
+        (:meta html-answer)
+        (recur (inc i)
+               (f))))))
+
 
 (def consumer (oauth/make-consumer (:key oauth-secrets)
                                    (:secret oauth-secrets)
