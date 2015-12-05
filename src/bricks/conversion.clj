@@ -35,7 +35,6 @@
    :tier_price3    0})
 
 
-
 (defn avg_price [number color-id]
   (->> (html/html-get (str "/items/part/" number "/price")
                       {:type       "part"
