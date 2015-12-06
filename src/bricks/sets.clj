@@ -65,6 +65,13 @@
 (defn count-parts [set]
   (reduce (fn [sum {qty :quantity}] (+ sum (conv/->int qty))) 0 set))
 
+(defn deal-with-duplicates [update-instructions]
+  (->> (group-by (fn [[_ part _ color-id]] [part color-id]) update-instructions)
+       (mapcat (fn [[_ coll]] (if (= 1 (count (first coll)))
+                                coll
+                                [(reduce (fn [[line part qty_a color-id] [_ _ qty_b _]]
+                                           [line part (+ qty_a qty_b) color-id])
+                                         coll)])))))
 
 (defn check-inventory [set inventory]
   set

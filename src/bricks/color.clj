@@ -10,7 +10,7 @@
 (defn color-id [name]
   (let [colors-->id [specter/ALL #(= (clojure.string/lower-case name) (:color_name %)) :color_id]
         id (peek (specter/select colors-->id colors))]
-    (if id id (throw (Exception. "The color isn't recognized")))))
+    (if id id (throw (Exception. (format "The color %s isn't recognized" name))))))
 
 (defn color-name [color_id]
   (let [colors-->name [specter/ALL #(= color_id (:color_id %)) :color_name]

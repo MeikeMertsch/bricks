@@ -52,10 +52,17 @@
 
 ;; Compare with current online inventory
 (let [set (concat (take 3 (rest (slurp-res "set-inventory"))) [(conv/->item [nil "2736" 10 86])
-                                                        (conv/->item [nil "3002" 1 0])])
+                                                               (conv/->item [nil "3002" 1 0])])
       inventory (slurp-res "inventory")
       processed-set (check-inventory set inventory)]
   (expect 4 (count (filter #(= 1 (count %)) processed-set)))
   (expect 1 (count (filter #(< 1 (count %)) processed-set)))
   (expect 0 (count (filter #(< (count %) 1) processed-set))))
 
+(let [upd1 ["3701;2;black" "3701" 2 11]
+      upd2 ["3069b;9;Light Bluish gray" "3069b" 9 86]
+      upd3 ["15209;30;white --> skipped: java.lang.Exception: Lot not in set!"]
+      upd4 ["loc127;3;red --> skipped: java.lang.Exception: color is not known for that part"]]
+  (expect #{upd1 upd2} (set (deal-with-duplicates [upd1 upd2])))
+  (expect [["3069b;9;Light Bluish gray" "3069b" 18 86]] (deal-with-duplicates [upd2 upd2]))
+  (expect #{upd4 upd3 upd2} (set (deal-with-duplicates [upd3 upd2 upd4]))))

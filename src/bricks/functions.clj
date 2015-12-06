@@ -3,8 +3,7 @@
             [bricks.io :as io]
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
-            [bricks.constants :as const]
-            [bricks.color :as color]))
+            [bricks.constants :as const]))
 
 (defn download-inventories []
   (html/html-get "/inventories"))
@@ -33,7 +32,7 @@
         updates (io/parse-lines-with-f update-file (partial io/parse-updates-in set))
         additions (io/parse-lines-with-f additions-file (partial io/parse-updates-in set))
         inventory (download-inventories)]
-    (-> (sets/delete-in-set set deletions)                  ; needs error handling
+    (-> (sets/delete-in-set set deletions)
         (sets/update-in-set updates)                        ; needs error handling
         (sets/add-in-set additions)
         (#(map (partial conv/->upload-instruction
