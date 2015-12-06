@@ -9,6 +9,12 @@
     (->> (line-seq reader)
          (map f))))
 
+(defn lot-in-set? [set instructions]
+  (empty? (tmp/find-in set (conv/->item instructions))))
+
+(defn log-line [line e]
+  [(format "%s --> skipped: %s" line e)])
+
 (defn write-lines [file-path lines]
   (with-open [wtr (clojure.java.io/writer (str file-path "_changed"))]
     (doseq [line lines] (.write wtr (str line "\n")))))
@@ -17,31 +23,28 @@
   (let [[part qty color] (clojure.string/split line #";")]
     (try
       (let [instructions [line part (conv/->int qty) (color/color-id color)]]
-        (if (not (empty? (tmp/find-in set (conv/->item instructions))))
+        (if (not (lot-in-set? set instructions))
           instructions
           (throw (Exception. "Lot not in set!"))))
       (catch Exception e
-        (let [log (format "%s --> skipped: %s" line e)]
-          [log])))))
+        (log-line line e)))))
 
 (defn parse-additions-in [set line]
   (let [[part qty color] (clojure.string/split line #";")]
     (try
       (let [instructions [line part (conv/->int qty) (color/color-id color)]]
-        (if (empty? (tmp/find-in set (conv/->item instructions)))
+        (if (lot-in-set? set instructions)
           instructions
           (throw (Exception. "Lot already in set!"))))
       (catch Exception e
-        (let [log (format "%s --> skipped: %s" line e)]
-          [log])))))
+        (log-line line e)))))
 
 (defn parse-deletions-in [set line]
   (let [[part color] (clojure.string/split line #";")]
     (try
       (let [instructions [line part 0 (color/color-id color)]]
-        (if (not (empty? (tmp/find-in set (conv/->item instructions))))
+        (if (not (lot-in-set? set instructions))
           [line part (color/color-id color)]
           (throw (Exception. "Lot not in set!"))))
       (catch Exception e
-        (let [log (format "%s --> skipped: %s" line e)]
-          [log])))))
+        (log-line line e)))))
