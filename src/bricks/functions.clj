@@ -3,7 +3,8 @@
             [bricks.io :as io]
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
-            [bricks.constants :as const]))
+            [bricks.constants :as const]
+            [bricks.color :as color]))
 
 (defn download-inventories []
   (html/html-get "/inventories"))
@@ -24,6 +25,14 @@
               new-price (conv/divide price-sum total-pcs)]]
     (html/html-put (str "/inventories/" (:inventory_id old))
                    {:quantity (str "+" (:quantity new)) :unit_price new-price})))
+
+(defn set-labels-for-printing [set-no]
+  (->> (sets/part-out set-no)
+       (map (fn [{color-id :color_id {part :no} :item}]
+              (format "%s %s" part (color/color-name color-id))))
+       (io/write-lines (format "labels/%s" set-no))))
+
+;(set-labels-for-printing "41040-1")
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
