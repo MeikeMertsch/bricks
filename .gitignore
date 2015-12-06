@@ -12,3 +12,4 @@ secrets
 .hg/
 .idea/
 bricks.iml
+/labels
