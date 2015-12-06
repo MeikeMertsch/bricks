@@ -28,11 +28,14 @@
 
 (defn set-labels-for-printing [set-no]
   (->> (sets/part-out set-no)
+       (sort-by (comp color/color-name :color_id))
        (map (fn [{color-id :color_id {part :no} :item}]
               (format "%s %s" part (color/color-name color-id))))
        (io/write-lines (format "labels/%s" set-no))))
 
 ;(set-labels-for-printing "41040-1")
+;(set-labels-for-printing "60099-1")
+;(set-labels-for-printing "75097-1")
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
