@@ -3,6 +3,7 @@
             [com.rpl.specter :as specter]
             [bricks.io :as io]
             [bricks.conversion :as conv]
+            [bricks.tmp :as tmp]
             [bricks.color :as color]))
 
 (defn validate-instructions
@@ -59,16 +60,11 @@
                (concat set))
           (let [error-file (format "error_%s" (System/currentTimeMillis))]
             (io/write-lines error-file (map first %))
-            (throw Exception (format "Non-valid additions detected. See %s" error-file)))))))
+            (throw (Exception. (format "Non-valid additions detected. See %s" error-file))))))))
 
 (defn count-parts [set]
   (reduce (fn [sum {qty :quantity}] (+ sum (conv/->int qty))) 0 set))
 
-(defn find-in [inventory item]
-  (filter #(and (= (:color_id item) (:color_id %))
-                (= (:no (:item item)) (:no (:item %)))
-                (= (:type (:item item)) (:type (:item %))))
-          inventory))
 
 (defn check-inventory [set inventory]
   set
@@ -78,4 +74,4 @@
       result
       (recur (rest set)
              (let [item (first set)]
-               (conj result (conj (find-in inventory item) item)))))))
+               (conj result (conj (tmp/find-in inventory item) item)))))))
