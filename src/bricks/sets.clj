@@ -1,6 +1,5 @@
 (ns bricks.sets
-  (:require [bricks.html :as html]
-            [com.rpl.specter :as specter]
+  (:require [com.rpl.specter :as specter]
             [bricks.io :as io]
             [bricks.conversion :as conv]
             [bricks.tmp :as tmp]
@@ -16,23 +15,6 @@
          [(log "color is not known for that part")])
        (catch Exception e
          [(log e)])))))
-
-(defn part-out [set-no]
-  (->> (html/html-get (format "/items/set/%s/subsets" set-no)
-                      {:type          "set"
-                       :no            set-no
-                       :instruction   true
-                       :break_subsets true})
-       (map #(get-in % [:entries 0]))))
-
-(defn part-out-minifig [minifig-no]
-  (->> (html/html-get (format "/items/minifig/%s/subsets" minifig-no)
-                      {:type          "MINIFIG"
-                       :no            minifig-no
-                       :instruction   true
-                       :break_subsets true})
-       (map #(get-in % [:entries 0]))))
-
 
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (conv/->int %)))) set))
