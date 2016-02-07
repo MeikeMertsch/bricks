@@ -25,9 +25,22 @@
                        :break_subsets true})
        (map #(get-in % [:entries 0]))))
 
+(println (html/html-get "https://api.bricklink.com/api/store/v1/inventory"))
+
+(defn part-out-minifig [set-no]
+  (->> (html/html-get (format "/items/minifig/%s/subsets" set-no)
+                      {:type          "MINIFIG"
+                       :no            set-no
+                       :instruction   true
+                       :break_subsets true})
+       (map #(get-in % [:entries 0]))))
+
 
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (conv/->int %)))) set))
+
+
+(clojure.pprint/pprint (part-out "75097-1"))
 
 (defn delete-in-set [set instructions]
   (loop [instructions instructions
@@ -59,7 +72,7 @@
           (->> (map conv/->item %)
                (concat set))
           (let [error-file (format "error_%s" (System/currentTimeMillis))]
-            (io/write-lines error-file (map first %))
+            (io/write-lines error-file (map first %)) ; -> error namespace
             (throw (Exception. (format "Non-valid additions detected. See %s" error-file))))))))
 
 (defn count-parts [set]
@@ -73,9 +86,8 @@
                                            [line part (+ qty_a qty_b) color-id])
                                          coll)])))))
 
-(defn check-inventory [set inventory]
-  set
-  (loop [set set
+(defn check-inventory [parts inventory]
+  (loop [set parts
          result []]
     (if (empty? set)
       result
