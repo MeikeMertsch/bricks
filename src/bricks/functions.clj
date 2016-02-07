@@ -1,6 +1,7 @@
 (ns bricks.functions
   (:require [bricks.html :as html]
             [bricks.io :as io]
+            [bricks.parse :as parse]
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
             [bricks.color :as color]))
@@ -72,9 +73,9 @@
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [parts (sets/multiply-set (sets/part-out set-no) quantity)
-        deletions (io/parse-lines-with-f delete-file (partial io/parse-deletions-in parts))
-        updates (io/parse-lines-with-f update-file (partial io/parse-updates-in parts))
-        additions (io/parse-lines-with-f additions-file (partial io/parse-updates-in parts))
+        deletions (io/read-with-parser delete-file (partial parse/parse-deletions-in parts))
+        updates (io/read-with-parser update-file (partial parse/parse-updates-in parts))
+        additions (io/read-with-parser additions-file (partial parse/parse-additions-in parts))
         inventory (download-inventories)]
     (-> (sets/delete-in-set parts deletions) ;update to zero?
         (sets/update-in-set updates)                        ; needs error handling

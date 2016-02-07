@@ -1,5 +1,5 @@
-(ns bricks.io-test
-  (:require [bricks.io :refer :all]
+(ns bricks.parse-test
+  (:require [bricks.parse :refer :all]
             [expectations :refer :all]
             [bricks.test-tools :refer :all]))
 
