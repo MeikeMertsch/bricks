@@ -1,6 +1,5 @@
 (ns bricks.color
   (:require [bricks.constants :as const]
-            [bricks.html :as html]
             [cheshire.core :as json]
             [com.rpl.specter :as specter]))
 
@@ -16,11 +15,6 @@
   (let [colors-->name [specter/ALL #(= color-id (:color_id %)) :color_name]
         name (peek (specter/select colors-->name colors))]
     (if name name (throw (Exception. (format "The color %s isn't recognized" color-id))))))
-
-(defn known-color? [part color-id]
-  (->> (html/html-get (str "/items/part/" part "/colors"))
-       (filter #(= color-id (:color_id %)))
-       ((complement empty?))))
 
 (defn replace-all-patterns [coll string]
   (loop [replacements coll

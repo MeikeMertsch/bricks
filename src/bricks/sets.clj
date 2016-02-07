@@ -3,14 +3,14 @@
             [bricks.io :as io]
             [bricks.conversion :as conv]
             [bricks.tmp :as tmp]
-            [bricks.color :as color]))
+            [bricks.api :as api]))
 
 (defn validate-instructions
   ([log] [log])
   ([line part quantity color-id]
    (let [log #(format "%s --> skipped: %s" line %)]
      (try
-       (if (color/known-color? part color-id)
+       (if (api/known-color? part color-id)
          [line part quantity color-id]
          [(log "color is not known for that part")])
        (catch Exception e

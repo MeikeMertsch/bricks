@@ -34,3 +34,8 @@
 
 (defn add-inventories [items-to-add]
   (html/html-post "/inventories" items-to-add))
+
+(defn known-color? [part color-id]
+  (->> (html/html-get (str "/items/part/" part "/colors"))
+       (filter #(= color-id (:color_id %)))
+       ((complement empty?))))
