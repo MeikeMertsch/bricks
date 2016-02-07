@@ -22,7 +22,7 @@
 (defn parse-updates-in [set line]
   (let [[part qty color] (clojure.string/split line #";")]
     (try
-      (let [instructions [line part (conv/->int qty) (color/color-id color)]]
+      (let [instructions [line part (conv/->int qty) (color/name->id color)]]
         (if (not (lot-in-set? set instructions))
           instructions
           (throw (Exception. "Lot not in set!"))))
@@ -32,7 +32,7 @@
 (defn parse-additions-in [set line]
   (let [[part qty color] (clojure.string/split line #";")]
     (try
-      (let [instructions [line part (conv/->int qty) (color/color-id color)]]
+      (let [instructions [line part (conv/->int qty) (color/name->id color)]]
         (if (lot-in-set? set instructions)
           instructions
           (throw (Exception. "Lot already in set!"))))
@@ -42,9 +42,9 @@
 (defn parse-deletions-in [set line]
   (let [[part color] (clojure.string/split line #";")]
     (try
-      (let [instructions [line part 0 (color/color-id color)]]
+      (let [instructions [line part 0 (color/name->id color)]]
         (if (not (lot-in-set? set instructions))
-          [line part (color/color-id color)]
+          [line part (color/name->id color)]
           (throw (Exception. "Lot not in set!"))))
       (catch Exception e
         (log-line line e)))))

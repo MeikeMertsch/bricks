@@ -3,8 +3,8 @@
             [expectations :refer :all]))
 
 ; Getting A Color-id By Name
-(expect 86 (color-id "light bluish gray"))
-(expect Exception (color-id "lbg"))
+(expect 86 (name->id "light bluish gray"))
+(expect Exception (name->id "lbg"))
 
 ; Color Validation
 (expect true (known-color? "3002" 11))

@@ -27,9 +27,9 @@
 
 (defn set-labels-for-printing [set-no]
   (->> (sets/part-out set-no)
-       (sort-by (comp color/color-name :color_id))
+       (sort-by (comp color/id->name :color_id))
        (map (fn [{color-id :color_id {part :no} :item qty :quantity}]
-              (format "%s %s %s" part (color/short-color-name color-id) qty)))
+              (format "%s %s %s" part (color/id->short-name color-id) qty)))
        (io/write-lines (format "labels/%s" set-no))))
 
 ;(set-labels-for-printing "60099-1")
@@ -37,7 +37,7 @@
 
 
 (defn prepare-print [{color-id :color_id {part :no type-no :type} :item qty :quantity e_qty :extra_quantity}]
-  (let [formatted-string (format "%3s %15s %s" (+ qty e_qty) part (color/short-color-name color-id))]
+  (let [formatted-string (format "%3s %15s %s" (+ qty e_qty) part (color/id->short-name color-id))]
   (if (= type-no "MINIFIG")
     (->> (sets/part-out-minifig part)
          (map prepare-print)
@@ -50,7 +50,7 @@
 
 (defn set-subset-labels-for-printing [set-base-no]
   (->> (mapcat (fn [set-no] (->> (sets/part-out set-no)
-                                 (sort-by (comp color/color-name :color_id))
+                                 (sort-by (comp color/id->name :color_id))
                                  (map prepare-print)
                                  (cons set-no)))
                (map #(format "%s-%s" set-base-no %) (range 2 (inc 25))))
@@ -62,7 +62,7 @@
 ;(set-subset-labels-for-printing "75097")
 
 #_(println((fn [set-no] (->> (sets/part-out set-no)
-                  (sort-by (comp color/color-name :color_id))
+                  (sort-by (comp color/id->name :color_id))
                   (map prepare-print)
                   (cons set-no))) "75097-5"))
 
