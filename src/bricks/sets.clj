@@ -25,8 +25,6 @@
                        :break_subsets true})
        (map #(get-in % [:entries 0]))))
 
-(println (html/html-get "https://api.bricklink.com/api/store/v1/inventory"))
-
 (defn part-out-minifig [minifig-no]
   (->> (html/html-get (format "/items/minifig/%s/subsets" minifig-no)
                       {:type          "MINIFIG"
@@ -39,8 +37,6 @@
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (conv/->int %)))) set))
 
-
-(clojure.pprint/pprint (part-out "75097-1"))
 
 (defn delete-in-set [set instructions]
   (loop [instructions instructions
