@@ -27,10 +27,10 @@
 
 (println (html/html-get "https://api.bricklink.com/api/store/v1/inventory"))
 
-(defn part-out-minifig [set-no]
-  (->> (html/html-get (format "/items/minifig/%s/subsets" set-no)
+(defn part-out-minifig [minifig-no]
+  (->> (html/html-get (format "/items/minifig/%s/subsets" minifig-no)
                       {:type          "MINIFIG"
-                       :no            set-no
+                       :no            minifig-no
                        :instruction   true
                        :break_subsets true})
        (map #(get-in % [:entries 0]))))

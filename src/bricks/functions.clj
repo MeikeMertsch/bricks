@@ -3,7 +3,6 @@
             [bricks.io :as io]
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
-            [bricks.constants :as const]
             [bricks.color :as color]))
 
 (defn download-inventories []
