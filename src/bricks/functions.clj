@@ -29,31 +29,55 @@
 (defn set-labels-for-printing [set-no]
   (->> (sets/part-out set-no)
        (sort-by (comp color/color-name :color_id))
-       (map (fn [{color-id :color_id {part :no} :item}]
-              (format "%s %s" part (color/color-name color-id))))
+       (map (fn [{color-id :color_id {part :no} :item qty :quantity}]
+              (format "%s %s %s" part (color/short-color-name color-id) qty)))
        (io/write-lines (format "labels/%s" set-no))))
+
+;(set-labels-for-printing "60099-1")
+;(set-labels-for-printing "75097-1")
+
+
+(defn prepare-print [{color-id :color_id {part :no type-no :type} :item qty :quantity e_qty :extra_quantity}]
+  (let [formatted-string (format "%3s %15s %s" (+ qty e_qty) part (color/short-color-name color-id))]
+  (if (= type-no "MINIFIG")
+    (->> (sets/part-out-minifig part)
+         (map prepare-print)
+         (cons formatted-string)
+         (interpose "\n     ")
+         (apply str))
+    formatted-string)))
+
+
 
 (defn set-subset-labels-for-printing [set-base-no]
   (->> (mapcat (fn [set-no] (->> (sets/part-out set-no)
                                  (sort-by (comp color/color-name :color_id))
-                                 (map (fn [{color-id :color_id {part :no} :item}]
-                                        (format "%s %s" part (color/color-name color-id))))
+                                 (map prepare-print)
                                  (cons set-no)))
                (map #(format "%s-%s" set-base-no %) (range 2 (inc 25))))
        (io/write-lines (format "labels/%s" set-base-no))))
 
 ;(set-subset-labels-for-printing "41040")
 ;(set-subset-labels-for-printing "60099")
+
 ;(set-subset-labels-for-printing "75097")
+
+#_(println((fn [set-no] (->> (sets/part-out set-no)
+                  (sort-by (comp color/color-name :color_id))
+                  (map prepare-print)
+                  (cons set-no))) "75097-5"))
+
+
+
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
-  (let [set (sets/multiply-set (sets/part-out set-no) quantity)
-        deletions (io/parse-lines-with-f delete-file (partial io/parse-deletions-in set))
-        updates (io/parse-lines-with-f update-file (partial io/parse-updates-in set))
-        additions (io/parse-lines-with-f additions-file (partial io/parse-updates-in set))
+  (let [parts (sets/multiply-set (sets/part-out set-no) quantity)
+        deletions (io/parse-lines-with-f delete-file (partial io/parse-deletions-in parts))
+        updates (io/parse-lines-with-f update-file (partial io/parse-updates-in parts))
+        additions (io/parse-lines-with-f additions-file (partial io/parse-updates-in parts))
         inventory (download-inventories)]
-    (-> (sets/delete-in-set set deletions)
+    (-> (sets/delete-in-set parts deletions) ;update to zero?
         (sets/update-in-set updates)                        ; needs error handling
         (sets/add-in-set additions)
         (#(map (partial conv/->upload-instruction
