@@ -5,16 +5,18 @@
             [bricks.tmp :as tmp]
             [bricks.api :as api]))
 
+(defn log [line error]
+  (format "%s --> skipped: %s" line error))
+
 (defn validate-instructions
   ([log] [log])
   ([line part quantity color-id]
-   (let [log #(format "%s --> skipped: %s" line %)]
-     (try
-       (if (api/known-color? part color-id)
-         [line part quantity color-id]
-         [(log "color is not known for that part")])
-       (catch Exception e
-         [(log e)])))))
+   (try
+     (if (api/known-color? part color-id)
+       [line part quantity color-id]
+       [(log line "color is not known for that part")])
+     (catch Exception e
+       [(log line e)]))))
 
 (defn multiply-set [set times]
   (map (fn [item] (update-in item [:quantity] #(* times (conv/->int %)))) set))
@@ -50,7 +52,7 @@
           (->> (map conv/->item %)
                (concat set))
           (let [error-file (format "error_%s" (System/currentTimeMillis))]
-            (io/write-lines error-file (map first %)) ; -> error namespace
+            (io/write-lines error-file (map first %))       ; -> error namespace
             (throw (Exception. (format "Non-valid additions detected. See %s" error-file))))))))
 
 (defn count-parts [set]
