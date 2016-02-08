@@ -12,27 +12,45 @@
     (println (format "%s lots in %s sets with price: %s" sum-lots quantity margin-set-price))
     (conv/divide price sum-lots)))
 
+(defn prepare-print [{color-id :color_id {part :no type-no :type} :item qty :quantity e_qty :extra_quantity}]
+  (let [formatted-string (format "%2s %15s %s" (+ qty e_qty) part (color/id->short-name color-id))]
+    (if (= type-no "MINIFIG")
+      (->> (api/part-out-minifig part)
+           (map prepare-print)
+           (cons formatted-string)
+           (interpose "\n     ")
+           (apply str))
+      formatted-string)))
+
+
+
 (defn set-labels-for-printing [set-no]
   (->> (api/part-out set-no)
        (sort-by (comp color/id->name :color_id))
        (map (fn [{color-id :color_id {part :no} :item qty :quantity}]
-              (format "%s %s %s" part (color/id->short-name color-id) qty)))
+              (format "%2s %15s %s" qty part (color/id->short-name color-id))))
+       (io/write-lines (format "labels/%s" set-no))))
+
+(defn set-labels-for-printing-m [set-no]
+  (->> (api/part-out set-no)
+       (sort-by (comp color/id->name :color_id))
+       (map prepare-print)
        (io/write-lines (format "labels/%s" set-no))))
 
 ;(set-labels-for-printing "60099-1")
 ;(set-labels-for-printing "75097-1")
 
 
-(defn prepare-print [{color-id :color_id {part :no type-no :type} :item qty :quantity e_qty :extra_quantity}]
-  (let [formatted-string (format "%3s %15s %s" (+ qty e_qty) part (color/id->short-name color-id))]
-  (if (= type-no "MINIFIG")
-    (->> (api/part-out-minifig part)
-         (map prepare-print)
-         (cons formatted-string)
-         (interpose "\n     ")
-         (apply str))
-    formatted-string)))
+(def new_sets ["41040-1"
+                 "41545-1"
+                 "41547-1"
+                 "41551-1"
+                 "41553-1"
+                 "41548-1"
+                 "79016-1"])
 
+(println (map set-labels-for-printing-m new_sets))
+#_(clojure.pprint/pprint (api/part-out "41545-1"))
 
 
 (defn set-subset-labels-for-printing [set-base-no]
@@ -45,13 +63,8 @@
 
 ;(set-subset-labels-for-printing "41040")
 ;(set-subset-labels-for-printing "60099")
-
 ;(set-subset-labels-for-printing "75097")
 
-#_(println((fn [set-no] (->> (api/part-out set-no)
-                  (sort-by (comp color/id->name :color_id))
-                  (map prepare-print)
-                  (cons set-no))) "75097-5"))
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [parts (sets/multiply-set (api/part-out set-no) quantity)
