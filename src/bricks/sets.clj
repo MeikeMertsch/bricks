@@ -8,7 +8,7 @@
 (defn log [line error]
   (format "%s --> skipped: %s" line error))
 
-(defn validate-instructions
+(defn validate-color
   ([log] [log])
   ([line part quantity color-id]
    (try
@@ -47,7 +47,7 @@
   (empty? (filter (fn [item] (= 1 (count item))) instructions)))
 
 (defn add-in-set [set instructions]
-  (->> (map #(apply validate-instructions %) instructions)
+  (->> (map #(apply validate-color %) instructions)
        (#(if (all-valid? %)
           (->> (map conv/->item %)
                (concat set))
@@ -74,3 +74,9 @@
       (recur (rest set)
              (let [item (first set)]
                (conj result (conj (tmp/find-in inventory item) item)))))))
+
+(defn lot-price [set margin-set-price quantity]
+  (let [sum-lots (count set)
+        price (* margin-set-price quantity)]
+    (println (format "%s lots in %s sets with price: %s" sum-lots quantity margin-set-price))
+    (conv/divide price sum-lots)))

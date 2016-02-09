@@ -5,21 +5,34 @@
 (defn download-inventories []
   (html/html-get "/inventories"))
 
-(defn part-out [set-no]
-  (->> (html/html-get (format "/items/set/%s/subsets" set-no)
-                      {:type          "set"
-                       :no            set-no
-                       :instruction   true
-                       :break_subsets true})
-       (map #(get-in % [:entries 0]))))
+(defn triple-out [{col :color_id {no :no type :type} :item}]
+  [col no type])
 
-(defn part-out-minifig [minifig-no]
-  (->> (html/html-get (format "/items/minifig/%s/subsets" minifig-no)
-                      {:type          "MINIFIG"
-                       :no            minifig-no
-                       :instruction   true
-                       :break_subsets true})
-       (map #(get-in % [:entries 0]))))
+(defn inv-map []
+  (let [inv (download-inventories)]
+    (-> (map triple-out inv)
+        (zipmap inv))))
+
+
+(defn map-out [set-no]
+  (let [inv (inv-map)]
+    (->> (html/html-get (format "/items/set/%s/subsets" set-no)
+                        {:type          "set"
+                         :no            set-no
+                         :instruction   true
+                         :break_subsets true})
+         (map #(get-in % [:entries 0]))
+         (map (fn [item] (assoc item :in-stock (inv (triple-out item))))))))
+
+(defn map-out-minifig [minifig-no]
+  (let [inv (inv-map)]
+    (->> (html/html-get (format "/items/minifig/%s/subsets" minifig-no)
+                        {:type          "MINIFIG"
+                         :no            minifig-no
+                         :instruction   true
+                         :break_subsets true})
+         (map #(get-in % [:entries 0]))
+         (map (fn [item] (assoc item :in-stock (inv (triple-out item))))))))
 
 (defn push-update [items-to-update]
   (for [item items-to-update
