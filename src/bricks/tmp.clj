@@ -1,5 +1,5 @@
 (ns bricks.tmp
-  (:require [bricks.api :as api]))
+  (:require [bricks.conversion :as conv]))
 
 
 (defn find-in [inventory item]
@@ -9,4 +9,4 @@
           inventory))
 
 (defn find-item [inv-map item]
-  (inv-map (api/triple-out item)))
+  (inv-map (conv/->item-key item)))

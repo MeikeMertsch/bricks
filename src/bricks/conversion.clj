@@ -5,6 +5,8 @@
        (with-precision 10)
        (format "%.2f")))
 
+(defn ->item-key [{col :color_id {no :no type :type} :item}]
+  [col no type])
 
 (defn ->int [string]
   (int (bigint string)))

@@ -5,14 +5,10 @@
 (defn download-inventories []
   (html/html-get "/inventories"))
 
-(defn triple-out [{col :color_id {no :no type :type} :item}]
-  [col no type])
-
 (defn inv-map []
   (let [inv (download-inventories)]
-    (-> (map triple-out inv)
+    (-> (map conv/->item-key inv)
         (zipmap inv))))
-
 
 (defn map-out [set-no]
   (let [inv (inv-map)]
@@ -22,7 +18,7 @@
                          :instruction   true
                          :break_subsets true})
          (map #(get-in % [:entries 0]))
-         (map (fn [item] (assoc item :in-stock (inv (triple-out item))))))))
+         (map (fn [item] (assoc item :in-stock (inv (conv/->item-key item))))))))
 
 (defn map-out-minifig [minifig-no]
   (let [inv (inv-map)]
@@ -32,7 +28,7 @@
                          :instruction   true
                          :break_subsets true})
          (map #(get-in % [:entries 0]))
-         (map (fn [item] (assoc item :in-stock (inv (triple-out item))))))))
+         (map (fn [item] (assoc item :in-stock (inv (conv/->item-key item))))))))
 
 (defn push-update [items-to-update]
   (for [item items-to-update
