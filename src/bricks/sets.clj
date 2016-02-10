@@ -66,7 +66,7 @@
                                            [line part (+ qty_a qty_b) color-id])
                                          coll)])))))
 
-(defn check-inventory [parts inventory]
+(defn group-duplicates [parts inventory]
   (loop [set parts
          result []]
     (if (empty? set)

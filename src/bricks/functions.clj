@@ -79,7 +79,7 @@
         (#(map (partial conv/->upload-instruction
                         (sets/lot-price % margin-set-price quantity))
                %))
-        (sets/check-inventory inventory)
+        (sets/group-duplicates inventory)
         (#(let [items-to-add (map first (filter (fn [item] (= 1 (count item))) %))
                 items-to-update (filter (fn [item] (not= 1 (count item))) %)]
            (api/add-inventories items-to-add)

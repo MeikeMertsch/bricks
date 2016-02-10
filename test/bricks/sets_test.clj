@@ -54,10 +54,10 @@
 (let [set (concat (take 3 (rest (slurp-res "set-inventory"))) [(conv/->item [nil "2736" 10 86])
                                                                (conv/->item [nil "3002" 1 0])])
       inventory (slurp-res "inventory")
-      processed-set (check-inventory set inventory)]
-  (expect 4 (count (filter #(= 1 (count %)) processed-set)))
-  (expect 1 (count (filter #(< 1 (count %)) processed-set)))
-  (expect 0 (count (filter #(< (count %) 1) processed-set))))
+      grouped-set (group-duplicates set inventory)]
+  (expect 4 (count (filter #(= 1 (count %)) grouped-set)))
+  (expect 1 (count (filter #(< 1 (count %)) grouped-set)))
+  (expect 0 (count (filter #(< (count %) 1) grouped-set))))
 
 (let [upd1 ["3701;2;black" "3701" 2 11]
       upd2 ["3069b;9;Light Bluish gray" "3069b" 9 86]
