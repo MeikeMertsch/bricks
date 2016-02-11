@@ -76,14 +76,14 @@
                (conj result (conj (tmp/find-in inventory item) item)))))))
 
 
-(defn group-with-duplicates [parts inv-map]
+(defn group-with-inventory [parts inv-map]
   (loop [set parts
          result []]
     (if (empty? set)
       result
       (recur (rest set)
              (let [item (first set)]
-               (conj result (conj (inv-map (conv/->item-key item)) item)))))))
+               (conj result (concat (inv-map (conv/->item-key item)) [item])))))))
 
 
 
