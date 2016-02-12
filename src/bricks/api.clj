@@ -18,7 +18,7 @@
                          :instruction   true
                          :break_subsets true})
          (map #(get-in % [:entries 0]))
-         (map (fn [item] (assoc item :in-stock (inv (conv/->item-key item))))))))
+         (map (fn [item] (assoc item :in-stock (some? (inv (conv/->item-key item)))))))))
 
 (defn map-out-minifig [minifig-no]
   (let [inv (inv-map)]
