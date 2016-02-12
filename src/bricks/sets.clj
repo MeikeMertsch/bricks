@@ -19,7 +19,9 @@
        [(log line e)]))))
 
 (defn multiply-set [set times]
-  (map (fn [item] (update-in item [:quantity] #(* times (conv/->int %)))) set))
+  (map (fn [item] (update-in
+                    (update-in item [:quantity] #(* times (conv/->int %)))
+                    [:extra_quantity] #(* times (conv/->int %)))) set))
 
 
 (defn delete-in-set [set instructions]
