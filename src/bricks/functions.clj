@@ -71,10 +71,8 @@
 ;(set-subset-labels-for-printing "75097")
 
 
-#_(def input (html/temp))
-
-(defn ->csv [{{part :no name :name} :item qty :quantity e-qty :extra_quantity :color-id :color_id in-stock :in-stock}]
-  (format "%s\t%s\t%s\t%s\t%s" (if in-stock "x" " ") (- qty e-qty) part (color/id->short-name color-id) name))
+(defn ->csv [{{part :no name :name type :type} :item qty :quantity e-qty :extra_quantity :color-id :color_id in-stock :in-stock}]
+  (format "%s\t%s\t%s\t%s\t%s\t%s" (if in-stock "x" " ") (- qty e-qty) part (color/id->short-name color-id) type name))
 
 (def done-sets ["Swmagpromo-1"
                 "30256-1"
@@ -119,8 +117,17 @@
     (println (create-checklist "41548-1" 1))
     )
 
+(defn read-confirmed-set [file margin-set-price qty]
+  (let [inv (api/inv-map)]
+    (->> (io/read-with-parser (str "confirmed/" file ".csv") parse/parse-confirmed)
+         (map (fn [item] (assoc item :in-stock (some? (inv (conv/->item-key item))))))
+         (#(let [lot-price (sets/lot-price % margin-set-price qty)
+                 updates (filter :in-stock %)
+                 news (remove :in-stock %)]
+            (map (fn [ding] (conv/->upload-instruction lot-price ding)) %))))))
 
-
+(clojure.pprint/pprint (read-confirmed-set "2016-02-12-30256-1" 34.375 21))
+;(println (read-confirmed-set "2016-02-12-30256-1" 34.375 21))
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [parts (sets/multiply-set (api/map-out set-no) quantity)
