@@ -38,3 +38,8 @@
           (throw (Exception. "Lot not in set!"))))
       (catch Exception e
         (log-line line e)))))
+
+
+(defn parse-confirmed [line]
+  (let [[_ qty part color-name type] (take 5 (clojure.string/split line #";"))]
+    (conv/->item [_ part qty (color/short-name->id color-name)] type)))
