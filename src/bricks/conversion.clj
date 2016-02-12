@@ -11,10 +11,12 @@
 (defn ->int [string]
   (int (bigint string)))
 
-(defn ->item [[_ part quantity color-id]]
-  {:item     {:no part :type "PART"}
-   :color_id color-id
-   :quantity quantity})
+(defn ->item
+  ([thing] (->item thing "PART"))
+  ([[_ part quantity color-id] type]
+   {:item     {:no part :type type}
+    :color_id color-id
+    :quantity quantity}))
 
 (defn ->upload-instruction [lot-price
                             {quantity              :quantity
@@ -24,7 +26,7 @@
                     :type type}
    :color_id       color-id
    :quantity       quantity
-   :unit_price     (divide (bigdec lot-price) quantity)
+   :unit_price     (divide (bigdec lot-price) (->int quantity))
    :new_or_used    "N"
    :description    ""
    :remarks        ""
