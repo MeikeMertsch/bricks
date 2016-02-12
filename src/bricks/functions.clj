@@ -5,7 +5,11 @@
             [bricks.sets :as sets]
             [bricks.conversion :as conv]
             [bricks.color :as color]
-            [bricks.constants :as const]))
+            [bricks.constants :as const]
+            [bricks.html :as html]
+            [clj-time.core :as t]
+            [clj-time.format :as f]
+            [cheshire.core :as json]))
 
 (defn prepare-print [{color-id :color_id {part :no type-no :type} :item qty :quantity in-stock :in-stock}]
   (let [stock (if in-stock "X" " ")
@@ -65,6 +69,57 @@
 ;(set-subset-labels-for-printing "41040")
 ;(set-subset-labels-for-printing "60099")
 ;(set-subset-labels-for-printing "75097")
+
+
+#_(def input (html/temp))
+
+(defn ->csv [{{part :no name :name} :item qty :quantity e-qty :extra_quantity :color-id :color_id in-stock :in-stock}]
+  (format "%s\t%s\t%s\t%s\t%s" (if in-stock "x" " ") (- qty e-qty) part (color/id->short-name color-id) name))
+
+(def done-sets ["Swmagpromo-1"
+                "30256-1"
+                "5994-1"
+                "75104-1"
+                "41044-1"
+                "41040-1"
+                "41102-1"
+                "41545-1"
+                "41547-1"
+                "41551-1"
+                "41553-1"
+                "41548-1"
+                "79016-1"])
+
+#_(println (map #(->> (api/map-out %)
+                      json/generate-string
+                      (spit (str "parted-out/" %))) done-sets))
+
+
+
+(defn create-checklist [input qty]
+  (->> #_(api/map-out input)
+    (html/temp (str "parted-out/" input))
+    (#(sets/multiply-set % qty))
+    (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
+    (map ->csv)
+    (io/write-lines (str "checklists/" (f/unparse (f/formatter "yyyy-MM-dd-") (t/now)) input ".csv"))))
+
+#_(
+    (println (create-checklist "Swmagpromo-1" 93))
+    (println (create-checklist "30256-1" 21))
+    (println (create-checklist "5994-1" 75))
+    (println (create-checklist "75104-1" 1))
+    (println (create-checklist "41044-1" 10))
+    (println (create-checklist "41040-1" 3))
+    (println (create-checklist "41102-1" 7))
+    (println (create-checklist "41545-1" 1))
+    (println (create-checklist "41547-1" 1))
+    (println (create-checklist "41551-1" 1))
+    (println (create-checklist "41553-1" 1))
+    (println (create-checklist "41548-1" 1))
+    )
+
+
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
