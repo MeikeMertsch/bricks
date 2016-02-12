@@ -1,7 +1,8 @@
 (ns bricks.color
   (:require [bricks.constants :as const]
             [cheshire.core :as json]
-            [com.rpl.specter :as specter]))
+            [com.rpl.specter :as specter]
+            [clojure.set :refer [map-invert]]))
 
 (def colors (->> (slurp "resources/colors")
                  (#(json/parse-string % const/transform-to-keywords))))
@@ -25,13 +26,21 @@
              (let [[part abb] (first replacements)]
                (clojure.string/replace s (re-pattern part) abb))))))
 
+(def replacements {"bright " "B "
+                   "light " "L "
+                   "reddish " "R "
+                   "dark " "D "
+                   "medium " "M "
+                   "trans-" "T-"
+                   "flat " "F "
+                   "pearl " "P "})
+
+
 (defn id->short-name [color-id]
   (->> (id->name color-id)
-       (replace-all-patterns [["bright" "B"]
-                              ["light" "L"]
-                              ["reddish" "R"]
-                              ["dark" "D"]
-                              ["medium" "M"]
-                              ["trans" "T"]
-                              ["flat" "F"]
-                              ["pearl" "P"]])))
+       (replace-all-patterns replacements)))
+
+
+(defn short-name->id [color-name]
+  (->> (replace-all-patterns (map-invert replacements) color-name)
+       name->id))
