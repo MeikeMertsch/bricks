@@ -7,5 +7,5 @@
          (map parse-function))))
 
 (defn write-lines [file-path lines]
-  (with-open [wtr (clojure.java.io/writer (str file-path "_changed"))]
+  (with-open [wtr (clojure.java.io/writer file-path)]
     (doseq [line lines] (.write wtr (str line "\n")))))
