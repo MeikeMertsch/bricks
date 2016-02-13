@@ -111,6 +111,20 @@
 ;(println (create-checklist "41040-1" 3))
 ;(println (create-checklist "41102-1" 7))
 ;(println (create-checklist "75097-1" 15))
+(println (create-checklist "41545-1" 1))
+
+
+
+#_(
+
+    (println (create-checklist "41547-1" 1))
+    (println (create-checklist "41551-1" 1))
+    (println (create-checklist "41553-1" 1))
+    (println (create-checklist "41548-1" 1))
+    )
+
+
+
 
 ; x;30;4073;T-clear;PART;Plate, Round 1 x 1 Straight Side
 
@@ -133,14 +147,6 @@
 
 ;(println (map jul (range 2 26)))
 
-#_(
-
-    (println (create-checklist "41545-1" 1))
-    (println (create-checklist "41547-1" 1))
-    (println (create-checklist "41551-1" 1))
-    (println (create-checklist "41553-1" 1))
-    (println (create-checklist "41548-1" 1))
-    )
 
 (defn read-confirmed-set [file margin-set-price qty]
   (let [items (io/read-with-parser (str "confirmed/" file ".csv") parse/parse-confirmed)
