@@ -95,8 +95,8 @@
 
 
 (defn create-checklist [input qty]
-  (->> #_(api/map-out input)
-    (html/temp (str "parted-out/" input))
+  (->> (api/map-out input)
+    #_(html/temp (str "parted-out/" input))
     (#(sets/multiply-set % qty))
     (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
     (map ->csv)
@@ -141,7 +141,7 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-12-Swmagpromo-1" 15.625 93))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-12-30256-1" 34.375 21))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-5994-1" 26.3 75))
-
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75104-1" 1171.875 1))
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
   (let [parts (sets/multiply-set (api/map-out set-no) quantity)
