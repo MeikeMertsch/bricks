@@ -96,11 +96,11 @@
 
 (defn create-checklist [input qty]
   (->> (api/map-out input)
-    #_(html/temp (str "parted-out/" input))
-    (#(sets/multiply-set % qty))
-    (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
-    (map ->csv)
-    (io/write-lines (str "checklists/" (f/unparse (f/formatter "yyyy-MM-dd-") (t/now)) input ".csv"))))
+       #_(html/temp (str "parted-out/" input))
+       (#(sets/multiply-set % qty))
+       (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
+       (map ->csv)
+       (io/write-lines (str "checklists/" (f/unparse (f/formatter "yyyy-MM-dd-") (t/now)) input ".csv"))))
 
 
 ;   (println (create-checklist "Swmagpromo-1" 93))
@@ -110,7 +110,28 @@
 ;(println (create-checklist "41044-1" 10))
 ;(println (create-checklist "41040-1" 3))
 ;(println (create-checklist "41102-1" 7))
-;(println (create-checklist "75097-1" 7))
+;(println (create-checklist "75097-1" 15))
+
+; x;30;4073;T-clear;PART;Plate, Round 1 x 1 Straight Side
+
+(defn jul [day-no]
+  (create-checklist (str "75097-" day-no) 15))
+
+#_(clojure.pprint/pprint
+  (->> (for [subset [2 3 4 6 7 8 10 12 13 14 15 16 17 19 20 21 22 24]]
+         (io/read-with-parser (str "confirmed/2016-02-13-75097-" subset ".csv") parse/parse-confirmed))
+       (apply concat)
+       (group-by (juxt :color_id #(:type (:item %)) #(:no (:item %))))
+       vals
+       (map #(reduce (fn [{{no :no type :type} :item cid :color_id qty-a :quantity}
+                          {qty-b :quantity}] {:item {:no no :type type} :color_id cid :quantity (+ qty-a qty-b)}) %))
+       (map #(format " ;%s;%s;%s;%s;name" (:quantity %) (:no (:item %)) (color/id->short-name (:color_id %)) (:type (:item %))))
+       (io/write-lines "confirmed/2016-02-13-75097-1.csv")))
+
+
+
+
+;(println (map jul (range 2 26)))
 
 #_(
 
@@ -147,6 +168,7 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41044-1" 31.25 10))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41040-1" 236.25 3))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41102-1" 249.0 7))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75097-2" 249.0 7))
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
