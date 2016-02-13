@@ -168,7 +168,7 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41044-1" 31.25 10))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41040-1" 236.25 3))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41102-1" 249.0 7))
-;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75097-2" 249.0 7))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75097-1" 279.0 15))
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]

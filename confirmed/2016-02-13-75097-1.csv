@@ -1,9 +1,148 @@
- ;60;3623;R brown;PART;name
- ;60;11477;orange;PART;name
- ;60;54200;R brown;PART;name
+ ;15;3022;tan;PART;name
+ ;30;44359;L bluish gray;PART;name
+ ;30;6632;D bluish gray;PART;name
+ ;90;3062b;R brown;PART;name
+ ;30;30374;T-L blue;PART;name
+ ;60;3021;D bluish gray;PART;name
+ ;15;85984;white;PART;name
+ ;15;86208;L bluish gray;PART;name
+ ;45;30377;D bluish gray;PART;name
+ ;75;54200;tan;PART;name
+ ;30;2780;black;PART;name
+ ;15;3069b;L bluish gray;PART;name
+ ;15;3069b;T-yellow;PART;name
+ ;15;32184;L bluish gray;PART;name
+ ;45;3022;R brown;PART;name
+ ;75;15392;D bluish gray;PART;name
+ ;15;30375;D bluish gray;PART;name
+ ;30;54200;white;PART;name
+ ;15;30136;D brown;PART;name
+ ;15;4595;black;PART;name
+ ;15;4070;L bluish gray;PART;name
+ ;30;3023;black;PART;name
+ ;60;4032;R brown;PART;name
+ ;15;4733;D bluish gray;PART;name
+ ;45;3023;D bluish gray;PART;name
+ ;15;4589b;D bluish gray;PART;name
+ ;75;3024;L bluish gray;PART;name
+ ;60;3024;T-D blue;PART;name
+ ;15;30503;white;PART;name
+ ;45;15573;L bluish gray;PART;name
+ ;30;4032;D green;PART;name
+ ;75;4085d;D bluish gray;PART;name
+ ;15;3022;black;PART;name
+ ;15;52107;white;PART;name
+ ;45;3024;red;PART;name
+ ;60;3024;T-black;PART;name
+ ;30;3024;T-clear;PART;name
+ ;15;47905;red;PART;name
+ ;15;99780;L bluish gray;PART;name
+ ;15;43898;black;PART;name
+ ;15;4595;L bluish gray;PART;name
+ ;30;61409;D bluish gray;PART;name
+ ;60;41677;black;PART;name
+ ;120;4073;T-neon orange;PART;name
+ ;15;57899;black;PART;name
+ ;30;85984;L bluish gray;PART;name
+ ;45;4740;black;PART;name
+ ;59;4073;green;PART;name
+ ;60;15712;P gold;PART;name
+ ;30;4073;R brown;PART;name
+ ;30;3623;R brown;PART;name
+ ;30;4592c02;L bluish gray;PART;name
+ ;30;11477;orange;PART;name
+ ;30;4265c;L bluish gray;PART;name
+ ;30;15403;black;PART;name
+ ;15;41769;L bluish gray;PART;name
+ ;15;2877;white;PART;name
+ ;30;54200;R brown;PART;name
+ ;30;3004;L bluish gray;PART;name
+ ;30;2540;white;PART;name
+ ;15;3069bpc1;D bluish gray;PART;name
+ ;30;54200;L bluish gray;PART;name
+ ;15;3623;red;PART;name
+ ;30;3069b;black;PART;name
+ ;15;3023;L bluish gray;PART;name
+ ;30;3024;D bluish gray;PART;name
+ ;15;30565;R brown;PART;name
+ ;15;30357;tan;PART;name
+ ;30;50950;white;PART;name
+ ;120;61252;D bluish gray;PART;name
+ ;60;18649;L bluish gray;PART;name
+ ;15;44358;L bluish gray;PART;name
+ ;15;4865b;T-L blue;PART;name
+ ;91;4073;T-L blue;PART;name
+ ;60;48729b;D bluish gray;PART;name
  ;30;4740;T-clear;PART;name
- ;60;4073;T-clear;PART;name
- ;30;3710;R brown;PART;name
- ;30;3710;D tan;PART;name
- ;30;47905;R brown;PART;name
- ;90;3070b;D bluish gray;PART;name
+ ;30;3710;L bluish gray;PART;name
+ ;30;4073;T-clear;PART;name
+ ;15;32530;black;PART;name
+ ;45;3710;R brown;PART;name
+ ;75;53451;D tan;PART;name
+ ;30;3673;L bluish gray;PART;name
+ ;15;3623;L bluish gray;PART;name
+ ;15;30374;T-B green;PART;name
+ ;45;64567;L bluish gray;PART;name
+ ;15;30176;green;PART;name
+ ;15;3022;D orange;PART;name
+ ;45;3022;L bluish gray;PART;name
+ ;15;3710;D bluish gray;PART;name
+ ;30;51739;D tan;PART;name
+ ;30;54200;T-black;PART;name
+ ;15;3004;D orange;PART;name
+ ;15;3710;D tan;PART;name
+ ;30;2412b;D bluish gray;PART;name
+ ;60;15712;L bluish gray;PART;name
+ ;30;11610;black;PART;name
+ ;15;4589b;T-black;PART;name
+ ;15;88289;D brown;PART;name
+ ;15;3020;D bluish gray;PART;name
+ ;105;4073;T-green;PART;name
+ ;15;88072;L bluish gray;PART;name
+ ;15;3960;L bluish gray;PART;name
+ ;15;99781;L bluish gray;PART;name
+ ;30;3665;R brown;PART;name
+ ;30;92280;red;PART;name
+ ;15;3022;D bluish gray;PART;name
+ ;15;3031;tan;PART;name
+ ;30;32062;black;PART;name
+ ;15;92738;black;PART;name
+ ;15;4085d;L bluish gray;PART;name
+ ;30;98138;T-red;PART;name
+ ;15;41770;L bluish gray;PART;name
+ ;60;4073;black;PART;name
+ ;15;47905;R brown;PART;name
+ ;15;48183;L bluish gray;PART;name
+ ;15;3700;R brown;PART;name
+ ;15;3022;white;PART;name
+ ;15;3679;L bluish gray;PART;name
+ ;15;3062b;T-clear;PART;name
+ ;75;4073;D bluish gray;PART;name
+ ;30;4274;blue;PART;name
+ ;15;3023;D tan;PART;name
+ ;15;85984;R brown;PART;name
+ ;15;4740;D bluish gray;PART;name
+ ;45;4070;R brown;PART;name
+ ;15;15279;olive green;PART;name
+ ;15;4499;R brown;PART;name
+ ;30;4073;T-red;PART;name
+ ;15;3023;D brown;PART;name
+ ;30;3070b;T-black;PART;name
+ ;15;15391;black;PART;name
+ ;30;11203;tan;PART;name
+ ;30;92946;D bluish gray;PART;name
+ ;15;30136;L bluish gray;PART;name
+ ;45;3062b;L bluish gray;PART;name
+ ;30;51739;L bluish gray;PART;name
+ ;15;30376;D bluish gray;PART;name
+ ;15;14769;tan;PART;name
+ ;15;2436b;L bluish gray;PART;name
+ ;30;4286;R brown;PART;name
+ ;15;87580;D bluish gray;PART;name
+ ;15;51739;D red;PART;name
+ ;15;2432;D bluish gray;PART;name
+ ;15;58247;black;PART;name
+ ;15;11477;L bluish gray;PART;name
+ ;105;4592c02;black;PART;name
+ ;45;3070b;D bluish gray;PART;name
+ ;15;3680;black;PART;name
