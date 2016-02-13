@@ -108,11 +108,11 @@
 ;   (println (create-checklist "5994-1" 75))
 ;(println (create-checklist "75104-1" 1))
 ;(println (create-checklist "41044-1" 10))
-(println (create-checklist "41040-1" 3))
+;(println (create-checklist "41040-1" 3))
+;(println (create-checklist "41102-1" 7))
 
 #_(
-    (println (create-checklist "41040-1" 3))
-    (println (create-checklist "41102-1" 7))
+
     (println (create-checklist "41545-1" 1))
     (println (create-checklist "41547-1" 1))
     (println (create-checklist "41551-1" 1))
@@ -136,14 +136,15 @@
                           :unit_price   new-price})) (grouped false []))]
     [:additions (grouped true)
      :updates updates
-     :adding (api/add-inventories additions)
-     :updating (api/update-inventories updates)]))
+     :adding #_(api/add-inventories additions)
+     :updating #_(api/update-inventories updates)]))
 
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-12-Swmagpromo-1" 15.625 93))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-12-30256-1" 34.375 21))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-5994-1" 26.3 75))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75104-1" 1171.875 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41044-1" 31.25 10))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41040-1" 236.25 3))
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]

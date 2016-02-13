@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+/checklists
 pom.xml
 pom.xml.asc
 secrets
