@@ -22,7 +22,7 @@
  ;1;92099;black;PART;Plate, Modified 4 x 6 with Trap Door Hinge (Long Pins)
  ;16;2654;black;PART;Plate, Round 2 x 2 with Rounded Bottom (Boat Stud)
  ;2;61409;black;PART;Slope 18 2 x 1 x 2/3 with 4 Slots
- ;2;54200;black;PART;Slope 30 1 x 1 x 2/3
+ ;4;54200;black;PART;Slope 30 1 x 1 x 2/3
  ;3;85984;black;PART;Slope 30 1 x 2 x 2/3
  ;2;13547;black;PART;Slope, Curved 4 x 1 Inverted
  ;2;3708;black;PART;Technic, Axle 12
@@ -37,7 +37,7 @@
  ;8;40490;black;PART;Technic, Liftarm 1 x 9 Thick
  ;4;32140;black;PART;Technic, Liftarm 2 x 4 L-Shape Thick
  ;2;32054;black;PART;Technic, Pin 3L with Friction Ridges Lengthwise and Stop Bush
- ;40;2780;black;PART;Technic, Pin with Friction Ridges Lengthwise WITH Center Slots
+ ;48;2780;black;PART;Technic, Pin with Friction Ridges Lengthwise WITH Center Slots
  ;2;6628;black;PART;Technic, Pin with Friction Ridges Lengthwise and Towball
  ;1;3069bps2;black;PART;Tile 1 x 2 with Avionics SW Copper, Red & Silver Pattern
  ;2;2431;black;PART;Tile 1 x 4
@@ -46,8 +46,8 @@
  ;5;41768;black;PART;Wedge 4 x 2 Left
  ;5;41767;black;PART;Wedge 4 x 2 Right
  ;8;43093;blue;PART;Technic, Axle Pin with Friction Ridges Lengthwise
- ;10;4274;blue;PART;Technic, Pin 1/2
- ;6;6558;blue;PART;Technic, Pin 3L with Friction Ridges Lengthwise
+ ;14;4274;blue;PART;Technic, Pin 1/2
+ ;8;6558;blue;PART;Technic, Pin 3L with Friction Ridges Lengthwise
  ;2;11090;D bluish gray;PART;Bar Holder with Clip
  ;4;3004;D bluish gray;PART;Brick 1 x 2
  ;4;3009;D bluish gray;PART;Brick 1 x 6
@@ -56,18 +56,18 @@
  ;4;87620;D bluish gray;PART;Brick, Modified Facet 2 x 2
  ;2;3062b;D bluish gray;PART;Brick, Round 1 x 1 Open Stud
  ;4;87081;D bluish gray;PART;Brick, Round 4 x 4 with Hole
- ;8;3024;D bluish gray;PART;Plate 1 x 1
+ ;9;3024;D bluish gray;PART;Plate 1 x 1
  ;4;4477;D bluish gray;PART;Plate 1 x 10
- ;2;3023;D bluish gray;PART;Plate 1 x 2
- ;6;3623;D bluish gray;PART;Plate 1 x 3
+ ;4;3023;D bluish gray;PART;Plate 1 x 2
+ ;10;3623;D bluish gray;PART;Plate 1 x 3
  ;10;3710;D bluish gray;PART;Plate 1 x 4
  ;8;3666;D bluish gray;PART;Plate 1 x 6
  ;2;2445;D bluish gray;PART;Plate 2 x 12
- ;12;3022;D bluish gray;PART;Plate 2 x 2
+ ;13;3022;D bluish gray;PART;Plate 2 x 2
  ;7;3021;D bluish gray;PART;Plate 2 x 3
  ;14;3020;D bluish gray;PART;Plate 2 x 4
  ;2;3795;D bluish gray;PART;Plate 2 x 6
- ;2;3034;D bluish gray;PART;Plate 2 x 8
+ ;8;3034;D bluish gray;PART;Plate 2 x 8
  ;1;3029;D bluish gray;PART;Plate 4 x 12
  ;4;3032;D bluish gray;PART;Plate 4 x 6
  ;6;3035;D bluish gray;PART;Plate 4 x 8
@@ -81,7 +81,7 @@
  ;8;10247;D bluish gray;PART;Plate, Modified 2 x 2 with Pin Hole - Full Cross Support Underneath
  ;1;92107;D bluish gray;PART;Plate, Modified 6 x 8 Trap Door Frame Horizontal (Long Pin Holders)
  ;2;61409;D bluish gray;PART;Slope 18 2 x 1 x 2/3 with 4 Slots
- ;4;54200;D bluish gray;PART;Slope 30 1 x 1 x 2/3
+ ;6;54200;D bluish gray;PART;Slope 30 1 x 1 x 2/3
  ;10;85984;D bluish gray;PART;Slope 30 1 x 2 x 2/3
  ;8;4286;D bluish gray;PART;Slope 33 3 x 1
  ;8;3040;D bluish gray;PART;Slope 45 2 x 1
@@ -117,7 +117,7 @@
  ;2;51739;D bluish gray;PART;Wedge, Plate 2 x 4
  ;3;43723;D bluish gray;PART;Wedge, Plate 3 x 2 Left
  ;3;43722;D bluish gray;PART;Wedge, Plate 3 x 2 Right
- ;2;2450;D bluish gray;PART;Wedge, Plate 3 x 3 Cut Corner
+ ;6;2450;D bluish gray;PART;Wedge, Plate 3 x 3 Cut Corner
  ;4;2419;D bluish gray;PART;Wedge, Plate 3 x 6 Cut Corners
  ;12;41770;D bluish gray;PART;Wedge, Plate 4 x 2 Left
  ;12;41769;D bluish gray;PART;Wedge, Plate 4 x 2 Right
@@ -130,13 +130,13 @@
  ;4;2476;D tan;PART;Plate, Modified 2 x 2 with Pin on Bottom
  ;2;6587;D tan;PART;Technic, Axle 3 with Stud
  ;2;15462;D tan;PART;Technic, Axle 5 with Stop
- ;22;4073;F silver;PART;Plate, Round 1 x 1 Straight Side
+ ;28;4073;F silver;PART;Plate, Round 1 x 1 Straight Side
  ;13;2412b;F silver;PART;Tile, Modified 1 x 2 Grille with Bottom Groove / Lip
  ;4;63965;L bluish gray;PART;Bar   6L with Stop Ring
  ;2;99207;L bluish gray;PART;Bracket 1 x 2 - 2 x 2 Inverted
  ;2;93274;L bluish gray;PART;Bracket 1 x 2 - 2 x 4
  ;4;3622;L bluish gray;PART;Brick 1 x 3
- ;4;2877;L bluish gray;PART;Brick, Modified 1 x 2 with Grille (Grill)
+ ;12;2877;L bluish gray;PART;Brick, Modified 1 x 2 with Grille (Grill)
  ;1;11211;L bluish gray;PART;Brick, Modified 1 x 2 with Studs on 1 Side
  ;4;6091;L bluish gray;PART;Brick, Modified 1 x 2 x 1 1/3 with Curved Top
  ;2;30414;L bluish gray;PART;Brick, Modified 1 x 4 with 4 Studs on 1 Side
@@ -151,14 +151,14 @@
  ;4;60479;L bluish gray;PART;Plate 1 x 12
  ;5;3023;L bluish gray;PART;Plate 1 x 2
  ;10;3623;L bluish gray;PART;Plate 1 x 3
- ;13;3710;L bluish gray;PART;Plate 1 x 4
+ ;14;3710;L bluish gray;PART;Plate 1 x 4
  ;4;3666;L bluish gray;PART;Plate 1 x 6
  ;2;3460;L bluish gray;PART;Plate 1 x 8
  ;2;2420;L bluish gray;PART;Plate 2 x 2 Corner
  ;10;3021;L bluish gray;PART;Plate 2 x 3
  ;3;3020;L bluish gray;PART;Plate 2 x 4
  ;1;3034;L bluish gray;PART;Plate 2 x 8
- ;2;3030;L bluish gray;PART;Plate 4 x 10
+ ;3;3030;L bluish gray;PART;Plate 4 x 10
  ;1;3032;L bluish gray;PART;Plate 4 x 6
  ;2;88072;L bluish gray;PART;Plate, Modified 1 x 2 with Arm Up (Horizontal Arm Length 5mm)
  ;2;11476;L bluish gray;PART;Plate, Modified 1 x 2 with Clip Horizontal on Side
@@ -173,8 +173,8 @@
  ;2;99206;L bluish gray;PART;Plate, Modified 2 x 2 x 2/3 with 2 Studs on Side
  ;2;64799;L bluish gray;PART;Plate, Modified 4 x 4 with 2 x 2 Cutout
  ;8;2654;L bluish gray;PART;Plate, Round 2 x 2 with Rounded Bottom (Boat Stud)
- ;1;4697b;L bluish gray;PART;Pneumatic T Piece New Style (T Bar)
- ;2;54200;L bluish gray;PART;Slope 30 1 x 1 x 2/3
+ ;2;4697b;L bluish gray;PART;Pneumatic T Piece New Style (T Bar)
+ ;3;54200;L bluish gray;PART;Slope 30 1 x 1 x 2/3
  ;1;41678;L bluish gray;PART;Technic, Axle and Pin Connector Perpendicular Double Split
  ;2;3895;L bluish gray;PART;Technic, Brick 1 x 12 with Holes
  ;4;3703;L bluish gray;PART;Technic, Brick 1 x 16 with Holes
@@ -184,9 +184,9 @@
  ;2;60483;L bluish gray;PART;Technic, Liftarm 1 x 2 Thick with Pin Hole and Axle Hole
  ;4;33299;L bluish gray;PART;Technic, Liftarm 1 x 3 with 2 Axle Holes and Pin / Crank
  ;2;32056;L bluish gray;PART;Technic, Liftarm 3 x 3 L-Shape Thin
- ;4;4274;L bluish gray;PART;Technic, Pin 1/2
+ ;6;4274;L bluish gray;PART;Technic, Pin 1/2
  ;4;32054;L bluish gray;PART;Technic, Pin 3L with Friction Ridges Lengthwise and Stop Bush
- ;8;3069b;L bluish gray;PART;Tile 1 x 2 with Groove
+ ;9;3069b;L bluish gray;PART;Tile 1 x 2 with Groove
  ;2;3069bps1;L bluish gray;PART;Tile 1 x 2 with SW Computer Pattern
  ;4;63864;L bluish gray;PART;Tile 1 x 3
  ;2;3068b;L bluish gray;PART;Tile 2 x 2 with Groove
@@ -209,12 +209,12 @@
  ;3;43857;red;PART;Technic, Liftarm 1 x 2 Thick
  ;12;32054;red;PART;Technic, Pin 3L with Friction Ridges Lengthwise and Stop Bush
  ;2;3001;tan;PART;Brick 2 x 4
- ;2;32002;tan;PART;Technic, Pin 3/4
- ;4;32556;tan;PART;Technic, Pin 3L without Friction Ridges Lengthwise
+ ;3;32002;tan;PART;Technic, Pin 3/4
+ ;5;32556;tan;PART;Technic, Pin 3L without Friction Ridges Lengthwise
  ;3;3065;T-black;PART;Brick 1 x 2 without Bottom Tube
  ;3;15303;T-B green;PART;"Bar   8L with Round End &#40;Spring Shooter Dart&#41;"
- ;4;54200;T-clear;PART;Slope 30 1 x 1 x 2/3
+ ;5;54200;T-clear;PART;Slope 30 1 x 1 x 2/3
  ;2;4740;T-red;PART;Dish 2 x 2 Inverted (Radar)
  ;26;3023;T-red;PART;Plate 1 x 2
- ;18;4073;T-red;PART;Plate, Round 1 x 1 Straight Side
- ;2;98138;T-red;PART;Tile, Round 1 x 1
+ ;22;4073;T-red;PART;Plate, Round 1 x 1 Straight Side
+ ;6;98138;T-red;PART;Tile, Round 1 x 1
