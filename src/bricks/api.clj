@@ -41,6 +41,12 @@
     (html/html-put (str "/inventories/" (:inventory_id old))
                    {:quantity (str "+" (:quantity new)) :unit_price new-price})))
 
+(defn update-inventories [items-to-update]
+  (for [item items-to-update]
+    (html/html-put (str "/inventories/" (:inventory_id item))
+                   {:quantity (str "+" (:quantity item)) :unit_price (:unit_price item)})))
+
+
 (defn add-inventories [items-to-add]
   (html/html-post "/inventories" items-to-add))
 
