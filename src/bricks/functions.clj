@@ -114,13 +114,12 @@
 ;(println (create-checklist "41545-1" 1))
 ;(println (create-checklist "41547-1" 1))
 ;(println (create-checklist "41551-1" 1))
-
+;(println (create-checklist "41553-1" 1))
+;(println (create-checklist "41548-1" 1))
 
 
 #_(
 
-    (println (create-checklist "41553-1" 1))
-    (println (create-checklist "41548-1" 1))
     )
 
 
@@ -177,6 +176,8 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-75097-1" 279.0 15))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41545-1" 27.0 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41547-1" 27.0 1))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41551-1" 27.0 1))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-41553-1" 27.0 1))
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
