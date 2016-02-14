@@ -1,30 +1,30 @@
- ;1;30374;black;PART;Bar   4L &#40;
- ;2;15303;black;PART;Bar   8L with Round End &#40;
- ;1;x346;black;PART;Bionicle 1 x 3 Tooth with Axle Hole;
-x;2;4070;black;PART;Brick, Modified 1 x 1 with Headlight;
- ;1;60583b;black;PART;Brick, Modified 1 x 1 x 3 with 2 Clips Vertical - Hollow Stud;
- ;3;3062b;black;PART;Brick, Round 1 x 1 Open Stud;
-x;1;4740;black;PART;Dish 2 x 2 Inverted (Radar);
- ;2;60596;black;PART;Door Frame 1 x 4 x 6 Type 2;
- ;1;4865b;black;PART;Panel 1 x 2 x 1 with Rounded Corners;
-x;2;3024;black;PART;Plate 1 x 1;
- ;4;3623;black;PART;Plate 1 x 3;
-x;1;3710;black;PART;Plate 1 x 4;
- ;2;3034;black;PART;Plate 2 x 8;
-x;1;4085d;black;PART;Plate, Modified 1 x 1 with Clip Vertical - Type 4 (thick open O clip);
-x;2;92280;black;PART;Plate, Modified 1 x 2 with Clip on Top;
-x;2;60470b;black;PART;Plate, Modified 1 x 2 with Clips Horizontal (open O clips);
- ;3;2540;black;PART;Plate, Modified 1 x 2 with Handle on Side - Free Ends;
-x;7;4073;black;PART;Plate, Round 1 x 1 Straight Side;
- ;1;x127c11;black;PART;String with End Studs 11L Overall;
- ;1;53585;black;PART;Technic Ball Joint with Through Axle Hole;
-x;2;32062;black;PART;Technic, Axle 2 Notched;
- ;1;3705;black;PART;Technic, Axle 4;
- ;2;44;black;PART;Technic, Axle and Pin Connector Toggle Joint Smooth;
- ;3;6541;black;PART;Technic, Brick 1 x 1 with Hole;
- ;1;62462;black;PART;Technic, Pin Connector Round 2L with Slot &#40;
-x;1;2780;black;PART;Technic, Pin with Friction Ridges Lengthwise WITH Center Slots;
- ;1;2460;black;PART;Tile, Modified 2 x 2 with Pin;
+ ;1;30374;black;PART;Bar   4L &#40;x
+ ;2;15303;black;PART;Bar   8L with Round End &#40;x
+ ;1;x346;black;PART;Bionicle 1 x 3 Tooth with Axle Hole;x
+x;2;4070;black;PART;Brick, Modified 1 x 1 with Headlight;x
+ ;1;60583b;black;PART;Brick, Modified 1 x 1 x 3 with 2 Clips Vertical - Hollow Stud;x
+ ;3;3062b;black;PART;Brick, Round 1 x 1 Open Stud;x
+x;1;4740;black;PART;Dish 2 x 2 Inverted (Radar);x
+ ;2;60596;black;PART;Door Frame 1 x 4 x 6 Type 2;x
+ ;1;4865b;black;PART;Panel 1 x 2 x 1 with Rounded Corners;x
+x;3;3024;black;PART;Plate 1 x 1;x
+ ;4;3623;black;PART;Plate 1 x 3;x
+x;1;3710;black;PART;Plate 1 x 4;x
+ ;2;3034;black;PART;Plate 2 x 8;x
+x;1;4085d;black;PART;Plate, Modified 1 x 1 with Clip Vertical - Type 4 (thick open O clip);x
+x;2;92280;black;PART;Plate, Modified 1 x 2 with Clip on Top;x
+x;2;60470b;black;PART;Plate, Modified 1 x 2 with Clips Horizontal (open O clips);x
+ ;2;2540;black;PART;Plate, Modified 1 x 2 with Handle on Side - Free Ends;x
+x;9;4073;black;PART;Plate, Round 1 x 1 Straight Side;x
+ ;1;x127c11;black;PART;String with End Studs 11L Overall;x
+ ;1;53585;black;PART;Technic Ball Joint with Through Axle Hole;x
+x;2;32062;black;PART;Technic, Axle 2 Notched;x
+ ;1;3705;black;PART;Technic, Axle 4;x
+ ;2;44;black;PART;Technic, Axle and Pin Connector Toggle Joint Smooth;x
+ ;3;6541;black;PART;Technic, Brick 1 x 1 with Hole;x
+ ;1;62462;black;PART;Technic, Pin Connector Round 2L with Slot &#40;x
+x;2;2780;black;PART;Technic, Pin with Friction Ridges Lengthwise WITH Center Slots;x
+ ;1;2460;black;PART;Tile, Modified 2 x 2 with Pin;x
  ;2;3795;blue;PART;Plate 2 x 6;x
  ;2;3034;blue;PART;Plate 2 x 8;x
 x;1;43093;blue;PART;Technic, Axle Pin with Friction Ridges Lengthwise;x
