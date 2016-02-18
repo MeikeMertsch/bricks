@@ -56,7 +56,18 @@
 
 ;(println (map create-checklist new_sets))
 #_(clojure.pprint/pprint (api/map-out "41545-1"))
-
+#_(clojure.pprint/pprint (->> (api/map-out "7641-1")
+                            (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
+                            (map (fn [{color-id :color_id {part :no type-no :type} :item in-stock :in-stock}]
+                                   (let [formatted-string (format "%s %s %s" (if in-stock "X" " ") part (color/id->short-name color-id))]
+                                     (if (= type-no "MINIFIG")
+                                       (->> (api/map-out-minifig part)
+                                            (map prepare-print)
+                                            (cons formatted-string)
+                                            (interpose "\n")
+                                            (apply str))
+                                       formatted-string))))
+                            (io/write-lines (format "labels/%s" "7641-1"))))
 
 (defn set-subset-labels-for-printing [set-base-no]
   (->> (mapcat (fn [set-no] (->> (api/map-out set-no)
@@ -117,6 +128,7 @@
 ;(println (create-checklist "41553-1" 1))
 ;(println (create-checklist "41548-1" 1))
 ;(println (create-checklist "79016-1" 1))
+;(println (create-checklist "7641-1" 1))
 
 #_(
 
