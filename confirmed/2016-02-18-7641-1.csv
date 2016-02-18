@@ -1,0 +1,200 @@
+x;2;44728;black;PART;Bracket 1 x 2 - 2 x 2;x
+ ;6;3005;black;PART;Brick 1 x 1;x
+ ;2;3004;black;PART;Brick 1 x 2;x
+ ;1;3010;black;PART;Brick 1 x 4;x
+ ;3;3009;black;PART;Brick 1 x 6;x
+ ;4;3003;black;PART;Brick 2 x 2;x
+ ;1;60476;black;PART;Brick, Modified 1 x 1 with Clip Horizontal;x
+ ;1;4360;black;PART;Minifig, Utensil Camera with Side Sight (Space Gun);x
+ ;1;4522;black;PART;Minifig, Utensil Tool Mallet / Hammer;x
+ ;1;4006;black;PART;Minifig, Utensil Tool Spanner Wrench / Screwdriver;x
+ ;1;4865;black;PART;Panel 1 x 2 x 1;x
+x;2;3710;black;PART;Plate 1 x 4;x
+ ;1;3027;black;PART;Plate 6 x 16;x
+ ;2;4510;black;PART;Plate, Modified 1 x 8 with Door Rail;x
+x;3;4073;black;PART;Plate, Round 1 x 1 Straight Side;x
+x;1;85984;black;PART;Slope 30 1 x 2 x 2/3;x
+ ;4;3675;black;PART;Slope 33 3 x 3 Double Convex;x
+ ;10;3040;black;PART;Slope 45 2 x 1;x
+ ;4;3037;black;PART;Slope 45 2 x 4;x
+x;1;32062;black;PART;Technic, Axle 2 Notched;x
+ ;1;6536;black;PART;Technic, Axle and Pin Connector Perpendicular;x
+ ;3;3070b;black;PART;Tile 1 x 1 with Groove;x
+x;1;3069b;black;PART;Tile 1 x 2 with Groove;x
+x;2;2431;black;PART;Tile 1 x 4;x
+ ;4;60700;black;PART;Tire 21mm D. x 12mm - Offset Tread Small Wide, Beveled Tread Edge;x
+ ;4;2496;black;PART;Wheel Skateboard / Trolley;x
+ ;2;60806;black;PART;Window 4 x 4 x 3 Roof with Bottom Panel;x
+ ;1;30414;blue;PART;Brick, Modified 1 x 4 with 4 Studs on 1 Side;x
+x;6;3062b;blue;PART;Brick, Round 1 x 1 Open Stud;x
+ ;2;42511;blue;PART;Minifig, Utensil Skateboard with Trolley Wheel Holders;x
+ ;1;3035;blue;PART;Plate 4 x 8;x
+ ;5;3070b;blue;PART;Tile 1 x 1 with Groove;x
+ ;0;48729;D bluish gray;PART;Bar   1L with Clip Mechanical Claw;
+ ;1;48729;D bluish gray;PART;Bar   1L with Clip Mechanical Claw;
+ ;3;3865;D bluish gray;PART;Baseplate  8 x 16;
+ ;2;30414;D bluish gray;PART;Brick, Modified 1 x 4 with 4 Studs on 1 Side;
+ ;3;3633;D bluish gray;PART;Fence 1 x 4 x 1;
+ ;2;30383;D bluish gray;PART;Hinge Plate 1 x 2 Locking with 1 Finger On Top;
+x;3;3023;D bluish gray;PART;Plate 1 x 2;
+x;2;3623;D bluish gray;PART;Plate 1 x 3;
+x;6;3666;D bluish gray;PART;Plate 1 x 6;
+x;2;3832;D bluish gray;PART;Plate 2 x 10;
+ ;4;2420;D bluish gray;PART;Plate 2 x 2 Corner;
+x;1;3020;D bluish gray;PART;Plate 2 x 4;
+x;1;3795;D bluish gray;PART;Plate 2 x 6;
+x;1;3032;D bluish gray;PART;Plate 4 x 6;
+ ;2;3027;D bluish gray;PART;Plate 6 x 16;
+x;1;3036;D bluish gray;PART;Plate 6 x 8;
+ ;2;60478;D bluish gray;PART;Plate, Modified 1 x 2 with Handle on End - Closed Ends;
+x;2;4510;D bluish gray;PART;Plate, Modified 1 x 8 with Door Rail;
+x;4;61409;D bluish gray;PART;Slope 18 2 x 1 x 2/3 with 4 Slots;
+ ;2;3069b;D bluish gray;PART;Tile 1 x 2 with Groove;
+ ;3;2431;D bluish gray;PART;Tile 1 x 4;
+x;4;6636;D bluish gray;PART;Tile 1 x 6;
+x;6;2412b;D bluish gray;PART;Tile, Modified 1 x 2 Grille with Bottom Groove / Lip;
+x;1;3062b;green;PART;Brick, Round 1 x 1 Open Stud;x
+ ;2;3741;green;PART;Plant Flower Stem;x
+ ;0;3957;L bluish gray;PART;Antenna 1 x 4;
+ ;1;3957;L bluish gray;PART;Antenna 1 x 4;
+ ;2;42445;L bluish gray;PART;Bar  12L with 1 x 2 Plate End Solid Studs and 1 x 1 Round Plate End;
+ ;1;2453;L bluish gray;PART;Brick 1 x 1 x 5;
+x;4;3004;L bluish gray;PART;Brick 1 x 2;
+ ;1;3004pb079;L bluish gray;PART;Brick 1 x 2 with White '2' on Blue Background Pattern (Sticker) - Set 7641;
+ ;1;2454;L bluish gray;PART;Brick 1 x 2 x 5;
+ ;1;2454pb026;L bluish gray;PART;Brick 1 x 2 x 5 with Yellow 'PIZZA' on Green Background Vertical Pattern (Sticker) - Set 7641;
+ ;3;3009;L bluish gray;PART;Brick 1 x 6;
+x;3;4070;L bluish gray;PART;Brick, Modified 1 x 1 with Headlight;
+ ;1;2439;L bluish gray;PART;Container, Trash Can with 2 Cover Holders;
+x;1;4740;L bluish gray;PART;Dish 2 x 2 Inverted (Radar);
+ ;2;30552;L bluish gray;PART;Hinge Cylinder 1 x 2 Locking with 1 Finger and Axle Hole on Ends;
+ ;4;44302;L bluish gray;PART;Hinge Plate 1 x 2 Locking with 2 Fingers On End;
+ ;1;46303;L bluish gray;PART;Minifig, Headgear Helmet Sports with Vent Holes;
+ ;1;59349;L bluish gray;PART;Panel 1 x 6 x 5;
+x;2;3710;L bluish gray;PART;Plate 1 x 4;
+ ;1;2445;L bluish gray;PART;Plate 2 x 12;
+x;3;3020;L bluish gray;PART;Plate 2 x 4;
+ ;2;3035;L bluish gray;PART;Plate 4 x 8;
+x;1;3794;L bluish gray;PART;Plate, Modified 1 x 2 with 1 Stud (Jumper);
+x;2;48336;L bluish gray;PART;Plate, Modified 1 x 2 with Handle on Side - Closed Ends;
+ ;1;2540;L bluish gray;PART;Plate, Modified 1 x 2 with Handle on Side - Free Ends;
+x;2;4510;L bluish gray;PART;Plate, Modified 1 x 8 with Door Rail;
+ ;4;4488;L bluish gray;PART;Plate, Modified 2 x 2 with Wheel Holder;
+x;2;4073;L bluish gray;PART;Plate, Round 1 x 1 Straight Side;
+ ;1;3040pb010;L bluish gray;PART;Slope 45 2 x 1 with Green and Red Buttons and Keypad Pattern;
+ ;1;6553;L bluish gray;PART;Technic Pole Reverser Handle;
+x;1;2736;L bluish gray;PART;Technic, Axle Towball;
+ ;1;32000;L bluish gray;PART;Technic, Brick 1 x 2 with Holes;
+x;2;2431;L bluish gray;PART;Tile 1 x 4;
+ ;2;2412b;L bluish gray;PART;Tile, Modified 1 x 2 Grille with Bottom Groove / Lip;
+ ;1;30256;L bluish gray;PART;Tile, Modified 2 x 2 with Bar and Stud;
+ ;4;6014b;L bluish gray;PART;Wheel 11mm D. x 12mm, Hole Notched for Wheels Holder Pin;
+ ;4;6014bc03;L bluish gray;PART;Wheel 11mm D. x 12mm, Hole Notched for Wheels Holder Pin with Black Tire Offset Tread Small Wider, Beveled Tread Edge &#40;
+ ;1;chef019;minifig;MINIFIG;Chef - White Torso with 8 Buttons, Light Bluish Gray Legs, Reddish Brown Ponytail Hair;
+ ;1;7641-1;minifig;INSTRUCTION;City Corner;
+ ;1;ovr037;minifig;MINIFIG;Overalls Green with Pocket, Green Legs, Blue Cap, Smirk and Stubble Beard;
+ ;1;cty146;minifig;MINIFIG;Plaid Button Shirt, Light Bluish Gray Legs, Black Male Hair;
+ ;1;cty147;minifig;MINIFIG;Skateboarder, Red Shirt with Silver Logos, Dark Blue Arms, Light Bluish Gray Short Legs, Male Messy Red Hair;
+ ;1;7641stk01;minifig;PART;Sticker for Set 7641 - (86465/4550513);
+ ;1;cty145;minifig;MINIFIG;Suit Black, Black Police Hat, Male Thin Grin, Brown Eyebrows, Thin Grin;
+ ;1;4719;red;PART;Bicycle Frame;
+ ;1;4719c01;red;PART;Bicycle, Complete Assembly &#40;
+ ;8;3005;red;PART;Brick 1 x 1;
+ ;1;6112;red;PART;Brick 1 x 12;
+ ;1;2465;red;PART;Brick 1 x 16;
+ ;13;3004;red;PART;Brick 1 x 2;
+ ;4;3622;red;PART;Brick 1 x 3;
+ ;9;3010;red;PART;Brick 1 x 4;
+ ;10;3009;red;PART;Brick 1 x 6;
+x;1;2456;red;PART;Brick 2 x 6;
+ ;1;4070;red;PART;Brick, Modified 1 x 1 with Headlight;
+ ;1;30414;red;PART;Brick, Modified 1 x 4 with 4 Studs on 1 Side;
+x;1;3062b;red;PART;Brick, Round 1 x 1 Open Stud;
+ ;1;2335;red;PART;Flag 2 x 2 Square;
+ ;1;2335pb032;red;PART;Flag 2 x 2 Square with Red Bicycle Pattern on both sides (Stickers) - Set 7641;
+ ;1;4485;red;PART;Minifig, Headgear Cap - Long Flat Bill;
+ ;6;4079b;red;PART;Minifig, Utensil Seat 2 x 2 with Center Sprue Mark;
+ ;2;59349;red;PART;Panel 1 x 6 x 5;
+x;1;3020;red;PART;Plate 2 x 4;
+ ;1;3795;red;PART;Plate 2 x 6;
+ ;2;6019;red;PART;Plate, Modified 1 x 1 with Clip Horizontal &#40;
+ ;2;60478;red;PART;Plate, Modified 1 x 2 with Handle on End - Closed Ends;
+x;1;4073;red;PART;Plate, Round 1 x 1 Straight Side;
+ ;2;4460b;red;PART;Slope 75 2 x 1 x 3 - Hollow Stud;
+ ;3;3660;red;PART;Slope, Inverted 45 2 x 2;
+x;1;32054;red;PART;Technic, Pin 3L with Friction Ridges Lengthwise and Stop Bush;
+ ;1;6636;red;PART;Tile 1 x 6;
+ ;1;3829c01;red;PART;Vehicle, Steering Stand 1 x 2 with Black Steering Wheel;
+x;1;3941;R brown;PART;Brick, Round 2 x 2 with Axle Hole;x
+ ;1;4449;R brown;PART;Minifig, Utensil Briefcase;x
+ ;2;2542;R brown;PART;Minifig, Utensil Oar / Paddle;x
+ ;2;3941;tan;PART;Brick, Round 2 x 2 with Axle Hole;x
+ ;3;60616;T-black;PART;Door 1 x 4 x 6 with Stud Handle;x
+ ;3;57895;T-black;PART;Glass for Window 1 x 4 x 6;x
+ ;1;2362a;T-black;PART;Panel 1 x 2 x 3 - Solid Studs;x
+ ;8;4215b;T-black;PART;Panel 1 x 4 x 3 - Hollow Studs;x
+ ;3;64453;T-black;PART;Windscreen 1 x 6 x 3;x
+ ;2;60602;T-clear;PART;Glass for Window 1 x 2 x 3 Flat Front;x
+ ;6;60603;T-clear;PART;Glass for Window 1 x 4 x 3 - Opening;x
+x;2;2343;T-clear;PART;Minifig, Utensil Goblet;x
+ ;1;59349;T-clear;PART;Panel 1 x 6 x 5;x
+x;3;54200;T-clear;PART;Slope 30 1 x 1 x 2/3;x
+ ;2;4720c01;T-clear;PART;Wheel Bicycle with Black Tire &#40;x
+ ;5;3024;T-orange;PART;Plate 1 x 1;x
+ ;3;4073;T-orange;PART;Plate, Round 1 x 1 Straight Side;x
+ ;3;54200;T-red;PART;Slope 30 1 x 1 x 2/3;x
+ ;4;3024;T-yellow;PART;Plate 1 x 1;x
+ ;4;3023;T-yellow;PART;Plate 1 x 2;x
+ ;1;4083;white;PART;Bar 1 x 4 x 2 with Studs;
+ ;1;2453;white;PART;Brick 1 x 1 x 5;
+x;11;3004;white;PART;Brick 1 x 2;
+ ;1;3004pb078;white;PART;Brick 1 x 2 with White '1' on Blue Background Pattern (Sticker) - Set 7641;
+ ;1;3010;white;PART;Brick 1 x 4;
+ ;1;3010pb102;white;PART;Brick 1 x 4 with 'SHOP' with Skateboard and Helmet Pattern (Sticker) - Set 7641;
+ ;8;3009;white;PART;Brick 1 x 6;
+ ;1;3009pb119;white;PART;Brick 1 x 6 with Box and Arrows and Globe and 'TRANSPORT' and with '244' Pattern (Stickers) - Set 7641;
+ ;1;3009pb120;white;PART;Brick 1 x 6 with Octan Logo Pattern (Sticker) - Set 7641;
+ ;1;3009pb121;white;PART;Brick 1 x 6 with Yellow 'PIZZA' on Green backgound Pattern (Sticker) - Set 7641;
+ ;2;3002;white;PART;Brick 2 x 3;
+ ;2;30241;white;PART;Brick, Modified 1 x 1 with Clip Vertical;
+ ;2;4070;white;PART;Brick, Modified 1 x 1 with Headlight;
+ ;4;60596;white;PART;Door Frame 1 x 4 x 6 Type 2;
+ ;1;4592c02;white;PART;Lever Small Base with Black Lever;
+ ;2;59349;white;PART;Panel 1 x 6 x 5;
+ ;1;3742c01;white;PART;Plant Flower Small, 4 on Sprue;
+ ;2;6019;white;PART;Plate, Modified 1 x 1 with Clip Horizontal &#40;
+ ;1;3297;white;PART;Slope 33 3 x 4;
+ ;2;60593;white;PART;Window 1 x 2 x 3 Flat Front;
+ ;4;60594;white;PART;Window 1 x 4 x 3 - No Shutter Tabs;
+ ;4;3005;yellow;PART;Brick 1 x 1;
+ ;1;3245b;yellow;PART;Brick 1 x 2 x 2 with Inside Axle Holder;
+ ;1;3245bpb14;yellow;PART;Brick 1 x 2 x 2 with Inside Axle Holder with Train Logo Red Pattern (Sticker) - Set 7641;
+ ;1;3010;yellow;PART;Brick 1 x 4;
+ ;1;3009;yellow;PART;Brick 1 x 6;
+ ;2;30179;yellow;PART;Door Frame 1 x 4 x 6 Type 1;
+ ;4;4079b;yellow;PART;Minifig, Utensil Seat 2 x 2 with Center Sprue Mark;
+x;18;3023;yellow;PART;Plate 1 x 2;
+ ;2;3623;yellow;PART;Plate 1 x 3;
+x;6;3710;yellow;PART;Plate 1 x 4;
+ ;6;3666;yellow;PART;Plate 1 x 6;
+x;2;3022;yellow;PART;Plate 2 x 2;
+ ;2;3021;yellow;PART;Plate 2 x 3;
+ ;6;3795;yellow;PART;Plate 2 x 6;
+ ;1;3033;yellow;PART;Plate 6 x 10;
+ ;1;3958;yellow;PART;Plate 6 x 6;
+ ;1;6019;yellow;PART;Plate, Modified 1 x 1 with Clip Horizontal &#40;
+x;2;4073;yellow;PART;Plate, Round 1 x 1 Straight Side;
+x;2;54200;yellow;PART;Slope 30 1 x 1 x 2/3;
+ ;1;61068;yellow;PART;Slope, Curved 2 x 4 x 2/3 No Studs without Bottom Tubes;
+ ;6;3665;yellow;PART;Slope, Inverted 45 2 x 1;
+ ;1;52501;yellow;PART;Slope, Inverted 45 6 x 1 Double with 1 x 4 Cutout;
+ ;1;3069bpb021;yellow;PART;Tile 1 x 2 with Bus Pattern (Sticker) - Set 7641;
+ ;3;3069b;yellow;PART;Tile 1 x 2 with Groove;
+ ;5;2431;yellow;PART;Tile 1 x 4;
+ ;4;6636;yellow;PART;Tile 1 x 6;
+ ;2;6179;yellow;PART;Tile, Modified 4 x 4 with Studs on Edge;
+ ;1;6179pb018;yellow;PART;Tile, Modified 4 x 4 with Studs on Edge with 'SHOP' with Skateboard and Helmet Pattern (Sticker) - Set 7641;
+ ;1;6179pb017;yellow;PART;Tile, Modified 4 x 4 with Studs on Edge with Bicycle, Wrench and Screwdriver Pattern (Sticker) - Set 7641;
+ ;2;4150p02;yellow;PART;Tile, Round 2 x 2 with Pizza Pattern;
+ ;4;50745;yellow;PART;Vehicle, Mudguard 4 x 2 1/2 x 1 2/3 with Arch Round;
+ ;1;52031;yellow;PART;Wedge 4 x 6 x 2/3 Triple Curved;
