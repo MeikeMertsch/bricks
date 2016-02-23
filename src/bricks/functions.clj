@@ -34,8 +34,8 @@
 
 (defn create-labels [set-no]
   (->> (api/map-out set-no)
-       (sort-by (comp color/id->name :color_id))
-       (map (fn [{color-id :color_id {part :no type-no :type} :quantity in-stock :in-stock}]
+       (sort-by (juxt #(color/id->name (:color_id %)) #(:name (:item %))))
+       (map (fn [{color-id :color_id {part :no type-no :type} :item in-stock :in-stock}]
               (let [formatted-string (format "%s %s %s" (if in-stock "X" " ") part (color/id->short-name color-id))]
                 (if (= type-no "MINIFIG")
                   (->> (api/map-out-minifig part)
@@ -45,6 +45,9 @@
                        (apply str))
                   formatted-string))))
        (io/write-lines (format "labels/%s" set-no))))
+
+
+;(println (create-labels "41044-1"))
 
 (def new_sets ["41040-1"
                "41545-1"
@@ -191,6 +194,8 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-13-41551-1" 27.0 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-41553-1" 27.0 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-41548-1" 27.0 1))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-79016-1" 358.0 1))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-18-7641-1" 650.0 1))
 
 
 (defn part-out-set [set-no quantity delete-file update-file additions-file margin-set-price]
