@@ -37,8 +37,3 @@
                                             10))
                    url
                    params)))
-
-
-(defn temp [path]
-  (-> (slurp path)
-      (json/parse-string const/transform-to-keywords)))

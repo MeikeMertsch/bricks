@@ -2,7 +2,6 @@
   (:require [bricks.sets :refer :all]
             [expectations :refer :all]
             [bricks.test-tools :refer :all]
-            [bricks.conversion :as conv]
             [bricks.tmp :as tmp]))
 
 ; Validate Instructions
@@ -42,22 +41,6 @@
   (expect true (all-valid? [good-instruction good-instruction]))
   (expect false (all-valid? [invalid-instruction good-instruction]))
   (expect true (all-valid? [])))
-
-;; Find in current online inventory
-(let [inventory (slurp-res "inventory")
-      item {:item {:no "2736" :type "PART"} :color_id 86}]
-  (expect (:item item) (in (:item (first (tmp/find-in inventory item)))))
-  (expect (:color_id item) (:color_id (first (tmp/find-in inventory item))))
-  (expect [] (tmp/find-in inventory {:item {:no "2736" :type "Something Strange"} :color_id 86})))
-
-;; Compare with current online inventory
-(let [set (concat (take 3 (rest (slurp-res "set-inventory"))) [(conv/->item [nil "2736" 10 86])
-                                                               (conv/->item [nil "3002" 1 0])])
-      inventory (slurp-res "inventory")
-      grouped-set (group-duplicates set inventory)]
-  (expect 4 (count (filter #(= 1 (count %)) grouped-set)))
-  (expect 1 (count (filter #(< 1 (count %)) grouped-set)))
-  (expect 0 (count (filter #(< (count %) 1) grouped-set))))
 
 (let [upd1 ["3701;2;black" "3701" 2 11]
       upd2 ["3069b;9;Light Bluish gray" "3069b" 9 86]

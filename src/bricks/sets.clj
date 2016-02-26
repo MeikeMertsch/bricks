@@ -68,15 +68,6 @@
                                            [line part (+ qty_a qty_b) color-id])
                                          coll)])))))
 
-(defn group-duplicates [parts inventory]
-  (loop [set parts
-         result []]
-    (if (empty? set)
-      result
-      (recur (rest set)
-             (let [item (first set)]
-               (conj result (conj (tmp/find-in inventory item) item)))))))
-
 (defn lot-price [set margin-set-price quantity]
   (let [sum-lots (count set)
         price (* margin-set-price quantity)]
