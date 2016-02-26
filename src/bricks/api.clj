@@ -30,17 +30,6 @@
          (map #(get-in % [:entries 0]))
          (map (fn [item] (assoc item :in-stock (inv (conv/->item-key item))))))))
 
-(defn push-update [items-to-update]
-  (for [item items-to-update
-        :let [new (first item)
-              old (last item)
-              total-pcs (+ (:quantity old) (:quantity new))
-              price-sum (+ (* (:quantity old) (bigdec (:unit_price old)))
-                           (* (:quantity new) (bigdec (:unit_price new))))
-              new-price (conv/divide price-sum total-pcs)]]
-    (html/html-put (str "/inventories/" (:inventory_id old))
-                   {:quantity (str "+" (:quantity new)) :unit_price new-price})))
-
 (defn update-inventories [items-to-update]
   (for [item items-to-update]
     (html/html-put (str "/inventories/" (:inventory_id item))
