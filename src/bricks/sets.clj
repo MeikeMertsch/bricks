@@ -2,7 +2,6 @@
   (:require [com.rpl.specter :as specter]
             [bricks.io :as io]
             [bricks.conversion :as conv]
-            [bricks.tmp :as tmp]
             [bricks.api :as api]))
 
 (defn log [line error]
