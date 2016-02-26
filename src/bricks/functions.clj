@@ -94,6 +94,7 @@
                              total-pcs (+ (:quantity i-item) (:quantity item))
                              price-sum (+ (* (:quantity i-item) (bigdec (:unit_price i-item))) (bigdec lot-price))
                              new-price (conv/divide price-sum total-pcs)]
+                         (println (str "Before update: " {:inventory_id (:inventory_id i-item) :quantity (:quantity i-item) :unit_price (:unit_price i-item)}))
                          {:inventory_id (:inventory_id i-item)
                           :quantity     (:quantity item)
                           :unit_price   new-price})) (grouped false []))]
@@ -117,3 +118,4 @@
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-41548-1" 27.0 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-14-79016-1" 358.0 1))
 ;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-18-7641-1" 650.0 1))
+;;;(clojure.pprint/pprint (read-confirmed-set "2016-02-23-41044-1" 31.25 1))
